@@ -11,14 +11,17 @@ public class Wall
 	 // konstruktor klasy Wall
      }
 	
+     private Spider spider; // pajak na planszy
      private HashMap<Enum, Leg> legs; // konczyny pajaka
      TreeSet<Grip> grips; // uchwyty na scianie
 	
-	// dla zadanej konczyny zwraca kontener dopuszczalnych 
-	// uchwytow do przejscia
+     
 	
      private Set getFeasibleGrips(Leg currentLeg, double radius)
      {
+	 // dla zadanej konczyny zwraca kontener dopuszczalnych 
+	 // uchwytow do przejscia
+	 
 	 return null;
      }
 	
