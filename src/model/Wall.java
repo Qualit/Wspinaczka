@@ -30,5 +30,5 @@ public class Wall
 		
 		return false;
 		// plus metoda do pamietania sladu 
-	}
+     }
 }
