@@ -11,7 +11,7 @@ public class Spider
     }
     
     /* Spider's legs */
-   private Map<LEG, Leg> legs; // nogi Krystian
+   private Map<LEG, Leg> legs; // nogiMariusza
    
    public void initializeLegs()
    {
@@ -19,7 +19,10 @@ public class Spider
        legs.put(LEG.RIGHT_HAND, new Leg());
        legs.put(LEG.LEFT_FOOT, new Leg());
        legs.put(LEG.RIGHT_FOOT, new Leg());
+       //dsadsadasdsa
    }
+   
+   
     
 
 }
