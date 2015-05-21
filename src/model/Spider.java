@@ -19,6 +19,7 @@ public class Spider
        legs.put(LEG.RIGHT_HAND, new Leg());
        legs.put(LEG.LEFT_FOOT, new Leg());
        legs.put(LEG.RIGHT_FOOT, new Leg());
+       //zmiana krystiana
    }
     
 
