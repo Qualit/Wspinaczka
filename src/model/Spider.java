@@ -11,7 +11,7 @@ public class Spider
     }
     
     /* Spider's legs */
-   private Map<LEG, Leg> legs; // 
+   private Map<LEG, Leg> legs; // nogi
    
    public void initializeLegs()
    {
