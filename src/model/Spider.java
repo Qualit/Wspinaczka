@@ -1,28 +1,23 @@
 package model;
 
-import java.util.List;
 import java.util.Map;
 
 public class Spider
 {
+	/* Spider's legs */
+	private Map<LegsList, Leg> legs; // nogiMariusza
+
     public Spider()
     {
 	
     }
-    
-    /* Spider's legs */
-   private Map<LEG, Leg> legs; // nogiMariusza
-   
+
    public void initializeLegs()
    {
-       legs.put(LEG.LEFT_HAND, new Leg());
-       legs.put(LEG.RIGHT_HAND, new Leg());
-       legs.put(LEG.LEFT_FOOT, new Leg());
-       legs.put(LEG.RIGHT_FOOT, new Leg());
+       legs.put(LegsList.LEFT_HAND, new Leg());
+       legs.put(LegsList.RIGHT_HAND, new Leg());
+       legs.put(LegsList.LEFT_FOOT, new Leg());
+       legs.put(LegsList.RIGHT_FOOT, new Leg());
        //dsadsadasdsa
    }
-   
-   
-    
-
 }
