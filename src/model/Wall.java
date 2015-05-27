@@ -1,8 +1,12 @@
 package model;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
+import java.util.Collections;
+
+
 
 public class Wall
 {
@@ -11,29 +15,31 @@ public class Wall
 	 // konstruktor klasy Wall
      }
 	
-     private Spider spider; // pajak na planszy
-     private HashMap<Enum, Leg> legs; // konczyny pajaka
-     TreeSet<Grip> grips; // uchwyty na scianie
+    
+     Set<Grip> grips; // uchwyty na scianie
 	
      
 	
-     private Set getFeasibleGrips(Leg currentLeg, double radius)
+     private  List<Grip> getFeasibleGrips(final State current, LEG activeLeg, double radius)
      {
 	 // dla zadanej konczyny zwraca kontener dopuszczalnych 
 	 // uchwytow do przejscia
 	 
-	 return null;
+	 List<Grip> feasibleGrips = new ArrayList<Grip>();
+	 
+	 // tutaj logika znajdowania dozwolonych wierzcholkow
+	 Collections.sort(feasibleGrips, new Comparator<Grip>() {
+
+	    @Override
+	    public int compare(Grip grip1, Grip grip2)
+	    {
+		return new Double(grip1.getY()).compareTo(new Double(grip2.getY()));
+	    }
+	});
+	 return feasibleGrips;
      }
 	
 	
-     public Boolean move(Leg leg, Grip nextGrip)
-     {
-		leg.addGrip(nextGrip);
-		leg.updateCost(nextGrip);
-		
-		return false;
-		// plus metoda do pamietania sladu 
-     }
      
      public void getRandomGrips ()
      {
