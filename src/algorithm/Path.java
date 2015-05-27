@@ -1,6 +1,6 @@
 package algorithm;
 
-public abstract class Path
+public class Path
 {
 
 }

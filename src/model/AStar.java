@@ -1,6 +1,9 @@
 package model;
 
-import algorithm.*;
+import algorithm.Algorithm;
+import algorithm.Path;
+import algorithm.Point;
+
 
 // TODO --> this will be algorithm implementation
 public class AStar implements Algorithm {
