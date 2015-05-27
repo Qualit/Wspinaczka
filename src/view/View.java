@@ -2,8 +2,13 @@ package view;
 
 public class View
 {
-	public void updateSpider()
-	{
-		// TODO Krystian
-	}
+    public void updateWall(String wall)
+    {
+	
+    }
+
+    public void updateSpider()
+    {
+	// TODO Krystian
+    }
 }
