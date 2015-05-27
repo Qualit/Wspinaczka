@@ -1,6 +1,6 @@
 package model;
 
-public enum LegsList
+public enum LEG
 {
 	LEFT_HAND, RIGHT_HAND, LEFT_FOOT, RIGHT_FOOT;
 }
