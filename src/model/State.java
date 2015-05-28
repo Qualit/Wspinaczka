@@ -8,17 +8,17 @@ import java.util.Map;
  */
 public class State
 {
-    
+    // mapa wskazujaca ktora konczyna jest na ktorym uchwycie, kolejnosc LEFT_HAND, RIGHT_HAND, LEFT_FOOT, RIGHT_FOOT
     private final Map<LEG, Grip> legState;
+    // stan z ktorego przyszlismy do biezacego stanu
     private State previous;
 
-    public State(Map<LEG, Grip> legState)
+    public State(Map<LEG, Grip> legState, State previous)
     {
-	super();
-	this.legState = legState;
+	    super();
+	    this.legState = legState;
+	    this.previous = previous;
     }
-    
-    
     
     /* (non-Javadoc)
      * returns hash code of state, calculated as a weighted sum of legs in this state
@@ -27,16 +27,16 @@ public class State
     @Override
     public int hashCode()
     {
-	int hash=0;
-	for(int i=1; i<=legState.values().size(); i++)
-	{
-	    int tmp = legState.get(i-1).hashCode()*i;
-	    hash+=tmp;
-	}
-	return hash;
+    	int hash=0;
+    	int i=1;
+	
+    	for (Grip g : legState.values())
+    	{
+    		hash+=g.hashCode()/i;		// zamiana *i na /i => mnozenie powodowalo wypadanie poza zakres inta co dalej powodowalo ze rozne stany mialy takie same hashe
+    		i++;
+    	}
+    	return hash;
     }
-
-
 
     @Override
     public boolean equals(Object obj)
@@ -57,8 +57,6 @@ public class State
 	return true;
     }
 
-
-
     public State getPrevious()
     {
         return previous;
@@ -69,8 +67,13 @@ public class State
         this.previous = previous;
     }
     
-    
-    
-    
-
+    public String toString()
+    {
+    	StringBuilder sb = new StringBuilder();
+    	for(Grip g : legState.values())
+    	{
+    		sb.append(g.getX() + " " + g.getY() + " " + g.getCost() + " " + g.getH() + " \n");
+    	}
+    	return sb.toString();
+    }
 }

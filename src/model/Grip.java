@@ -2,13 +2,11 @@ package model;
 
 public class Grip // implements Point (?)
 {
-	private final double x;
-	private final double y;
+	private final double x;	// wspolrzedna x uchwytu
+	private final double y;	// wspolrzedna y uchwytu
 	private final double cost; //koszt dojscia z dowolengo uchwytu do tego uchwytu
 	private final double h;    // wartosc heurysyki dla uchwytu
 	
-	
-
 	public Grip(double x, double y, double cost, double h)
 	{
 	    super();
@@ -18,34 +16,22 @@ public class Grip // implements Point (?)
 	    this.h = h;
 	}
 
-
-
-	public double getCost()
-	{
-		// TODO Auto-generated method stub
-		return this.cost;
-	}
-
-
-
 	@Override
 	public int hashCode()
 	{
-	    final int prime = 31;
+	    final int prime = 15485857;
 	    int result = 1;
 	    long temp;
-	    temp = Double.doubleToLongBits(cost);
-	    result = prime * result + (int) (temp ^ (temp >>> 32));
-	    temp = Double.doubleToLongBits(h);
-	    result = prime * result + (int) (temp ^ (temp >>> 32));
 	    temp = Double.doubleToLongBits(x);
 	    result = prime * result + (int) (temp ^ (temp >>> 32));
 	    temp = Double.doubleToLongBits(y);
 	    result = prime * result + (int) (temp ^ (temp >>> 32));
+	    temp = Double.doubleToLongBits(cost);
+	    result = prime * result + (int) (temp ^ (temp >>> 32));
+	    temp = Double.doubleToLongBits(h);
+	    result = prime * result + (int) (temp ^ (temp >>> 32));
 	    return result;
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj)
@@ -69,31 +55,23 @@ public class Grip // implements Point (?)
 	    return true;
 	}
 
-
-
 	public double getX()
 	{
 	    return x;
 	}
-
-
 
 	public double getY()
 	{
 	    return y;
 	}
 
-
-
+	public double getCost()
+	{
+		return cost;
+	}
+	
 	public double getH()
 	{
 	    return h;
 	}
-	
-	
-	
-	
-	
-	
-
 }
