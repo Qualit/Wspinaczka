@@ -48,6 +48,15 @@ public class Grip // implements Point (?)
 		return false;
 	    return true;
 	}
+	
+	public String toString()
+	{
+    	StringBuilder sb = new StringBuilder();
+
+    	sb.append("x=" +x + " y=" + y + " cost=" + cost + " \n");
+
+    	return sb.toString();
+	}
 
 	public double getX()
 	{

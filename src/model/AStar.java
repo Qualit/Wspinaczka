@@ -51,10 +51,10 @@ public class AStar implements Algorithm
 		openSet.add(start);
 		openSet.add(goal);
 		
-		for(State s : openSet)
-		{
-			System.out.println(s.toString());
-		}
+//		for(State s : openSet)
+//		{
+//			System.out.println(s.toString());
+//		}
 		
 		Map<LEG, Grip> jakasMapa = new HashMap<LEG, Grip>();
 		
@@ -77,9 +77,14 @@ public class AStar implements Algorithm
 			openSet.add(jakisStan);
 			openSet.add(jakisStan2);
 	   	 
-			for(State s : openSet)
+//			for(State s : openSet)
+//			{
+//				System.out.println(s.toString());
+//			}
+			
+			for (Grip g : wall.getGrips().values())
 			{
-				System.out.println(s.toString());
+				System.out.print(g.toString());
 			}
 			
 	}
