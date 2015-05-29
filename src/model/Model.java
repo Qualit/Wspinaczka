@@ -22,6 +22,7 @@ public class Model
     			break;
         	default:
     			System.out.println("Zła liczba argumentow");
+    			this.wall = null;
         		System.exit(1);
         		break;
     	}

@@ -50,6 +50,11 @@ public class Wall
 	// konstruktor sciany czytajacy dane z pliku
     public Wall(final String fileName) 
     {
+    	this.grips = null;
+    	this.n = 0;
+    	this.w = 0;
+    	this.start = null;
+    	this.goal = null;
 		// TODO Auto-generated constructor stub
 	}
 

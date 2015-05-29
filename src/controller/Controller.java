@@ -1,9 +1,14 @@
 package controller;
 
+import model.AStar;
 import model.Wall;
 
 public class Controller
 {
-    Wall wall; // sciana 
+    private final Wall wall; // sciana 
 
+    public Controller(Wall wall)
+    {
+    	this.wall = wall;
+    }
 }
