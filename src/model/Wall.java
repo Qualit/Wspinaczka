@@ -10,13 +10,16 @@ import java.util.Collections;
 public class Wall
 {
      private final Map<Integer, Grip> grips; // uchwyty na scianie
+     private final int n;	// ilosc uchwytow na scianie
+     private final double w; // wysokosc sciany
      private final State start; //stan poczatkowy
      private final State goal; // stan koncowy
      
      // konstruktor sciany losujacy parametry
      public Wall(final int n, final double w)
      {
-    	 
+    	 this.n = n;
+    	 this.w = w;
     	 
     	 
     	 // wszystko poniezej napisane dla celow TESTOWYCH
@@ -44,8 +47,14 @@ public class Wall
     	 this.goal = new State(koncowaMapa, null);
      }     
     
-	
-     private  List<Grip> getFeasibleGrips(final State current, LEG activeLeg, double radius)
+	// konstruktor sciany czytajacy dane z pliku
+    public Wall(final String fileName) 
+    {
+		// TODO Auto-generated constructor stub
+	}
+
+
+	private  List<Grip> getFeasibleGrips(final State current, LEG activeLeg, double radius)
      {
     	 // dla zadanej konczyny zwraca kontener dopuszczalnych 
     	 // uchwytow do przejscia
