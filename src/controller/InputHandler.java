@@ -70,12 +70,16 @@ public class InputHandler
 		numberOfGrips = Integer.parseInt(tokens[0]);
 		wallHeight = Double.parseDouble(tokens[1]);
 		
+		grips.put(0, new Grip(1.5 , 0.0, 2));
+		
 		for (int i=0 ; i < numberOfGrips ; i++)
 		{
 			textLine = bufferedReader.readLine();
 			tokens = textLine.split(delims);
-			grips.put(new Integer(i), new Grip(Double.parseDouble(tokens[0]), Double.parseDouble(tokens[1]), Double.parseDouble(tokens[2])));
+			grips.put(i+1, new Grip(Double.parseDouble(tokens[0]), Double.parseDouble(tokens[1]), Double.parseDouble(tokens[2])));
 		}
+		
+		grips.put(numberOfGrips+1, new Grip(1.5 , wallHeight, 1));
 
 		bufferedReader.close();
 		
