@@ -74,7 +74,7 @@ public class InputHandler
 		
 	}
 
-	private void randomGrips(int parseInt, double parseDouble) 
+	private void randomGrips(int n, double w) 
 	{
 		// TODO Auto-generated method stub
 		

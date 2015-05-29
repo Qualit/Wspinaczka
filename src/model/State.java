@@ -72,7 +72,7 @@ public class State
     	StringBuilder sb = new StringBuilder();
     	for(Grip g : legState.values())
     	{
-    		sb.append(g.getX() + " " + g.getY() + " " + g.getCost() + " " + g.getH() + " \n");
+    		sb.append(g.getX() + " " + g.getY() + " " + g.getCost() + " \n");
     	}
     	return sb.toString();
     }

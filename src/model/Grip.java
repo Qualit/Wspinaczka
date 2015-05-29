@@ -5,15 +5,13 @@ public class Grip // implements Point (?)
 	private final double x;	// wspolrzedna x uchwytu
 	private final double y;	// wspolrzedna y uchwytu
 	private final double cost; //koszt dojscia z dowolengo uchwytu do tego uchwytu
-	private final double h;    // wartosc heurysyki dla uchwytu
 	
-	public Grip(double x, double y, double cost, double h)
+	public Grip(double x, double y, double cost)
 	{
 	    super();
 	    this.x = x;
 	    this.y = y;
 	    this.cost = cost;
-	    this.h = h;
 	}
 
 	@Override
@@ -27,8 +25,6 @@ public class Grip // implements Point (?)
 	    temp = Double.doubleToLongBits(y);
 	    result = prime * result + (int) (temp ^ (temp >>> 32));
 	    temp = Double.doubleToLongBits(cost);
-	    result = prime * result + (int) (temp ^ (temp >>> 32));
-	    temp = Double.doubleToLongBits(h);
 	    result = prime * result + (int) (temp ^ (temp >>> 32));
 	    return result;
 	}
@@ -45,8 +41,6 @@ public class Grip // implements Point (?)
 	    Grip other = (Grip) obj;
 	    if (Double.doubleToLongBits(cost) != Double
 		    .doubleToLongBits(other.cost))
-		return false;
-	    if (Double.doubleToLongBits(h) != Double.doubleToLongBits(other.h))
 		return false;
 	    if (Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x))
 		return false;
@@ -68,10 +62,5 @@ public class Grip // implements Point (?)
 	public double getCost()
 	{
 		return cost;
-	}
-	
-	public double getH()
-	{
-	    return h;
 	}
 }

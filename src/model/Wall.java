@@ -24,11 +24,11 @@ public class Wall
     	 
     	 // wszystko poniezej napisane dla celow TESTOWYCH
     	 this.grips = new HashMap<Integer, Grip>();
-    	 grips.put(new Integer(1), new Grip(1.1, 2.05, 1.5, 5.2));
-    	 grips.put(new Integer(2), new Grip(2.1, 3.34, 1.12, 2.11));
-    	 grips.put(new Integer(3), new Grip(2.2, 1.24, 1.27, 4.04));
-    	 grips.put(new Integer(4), new Grip(1.2, 5.16, 1.7, 1.97));
-    	 grips.put(new Integer(5), new Grip(2.3, 4.75, 1.05, 3.33));
+    	 grips.put(new Integer(1), new Grip(1.1, 2.05, 1.5));
+    	 grips.put(new Integer(2), new Grip(2.1, 3.34, 1.12));
+    	 grips.put(new Integer(3), new Grip(2.2, 1.24, 1.27));
+    	 grips.put(new Integer(4), new Grip(1.2, 5.16, 1.7));
+    	 grips.put(new Integer(5), new Grip(2.3, 4.75, 1.05));
 
     	 Map<LEG, Grip> startowaMapa = new HashMap<LEG, Grip>();
     	 Map<LEG, Grip> koncowaMapa = new HashMap<LEG, Grip>();
