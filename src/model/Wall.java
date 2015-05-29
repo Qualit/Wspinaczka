@@ -9,14 +9,14 @@ import java.util.Collections;
 
 public class Wall
 {
-     private final Map<Integer, Grip> grips; // uchwyty na scianie
+     private final List<Grip> grips; // uchwyty na scianie
      private final int n;	// ilosc uchwytow na scianie
      private final double w; // wysokosc sciany
      private final State start; //stan poczatkowy
      private final State goal; // stan koncowy
      
      // konstruktor sciany losujacy parametry
-     public Wall(Map<Integer, Grip> grips, final int n, final double w)
+     public Wall(List<Grip> grips, final int n, final double w)
      {
     	 this.grips = grips;
     	 this.n = n;
@@ -46,10 +46,15 @@ public class Wall
 	 
     	 List<Grip> feasibleGrips = new ArrayList<Grip>();
     	 
-    	 for (Grip g : grips.values())
+    	 for (Grip g : grips)
     	 {
     		 feasibleGrips.add(g);
     	 }
+    	 
+//    	 for (int i = 0; true ; i++)
+//    	 {
+//    		 
+//    	 }
 	 
     	 // tutaj logika znajdowania dozwolonych wierzcholkow
     	 Collections.sort(feasibleGrips, new Comparator<Grip>() {
@@ -72,7 +77,7 @@ public class Wall
 		return w;
 	}
 
-	public final Map<Integer, Grip> getGrips() {
+	public final List<Grip> getGrips() {
 		return grips;
 	}
 

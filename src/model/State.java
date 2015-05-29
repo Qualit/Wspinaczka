@@ -22,6 +22,17 @@ public class State implements AbstractState
 	    this.previous = previous;
     }
     
+	public boolean areHandsOnTheSameGrip() 
+	{
+		return (legState.get(LEG.LEFT_HAND) == legState.get(LEG.RIGHT_HAND));
+	}
+	
+	public boolean areFeetOnTheSameGrip() 
+	{
+		return (legState.get(LEG.LEFT_FOOT) == legState.get(LEG.RIGHT_FOOT));
+	}
+
+    
     /* (non-Javadoc)
      * returns hash code of state, calculated as a weighted sum of legs in this state
      * @see java.lang.Object#hashCode()
@@ -79,8 +90,8 @@ public class State implements AbstractState
         this.previous = previous;
     }
 
-	public final Map<LEG, Grip> getLegState() {
+	public final Map<LEG, Grip> getLegState() 
+	{
 		return legState;
 	}
-    
 }

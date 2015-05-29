@@ -2,10 +2,13 @@ package model;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
+
+import wspinaczka.Configuration;
 
 import algorithm.AbstractState;
 import algorithm.Algorithm;
@@ -62,12 +65,40 @@ public class AStar implements Algorithm
 	    	openSet.remove(current);
 	    	closedSet.add(current);
 	    	
-	    	
+	    	Set<State> neighbourNodes = new HashSet<State>();
+	    	neighbourNodes = neighbourNodes(current);
 	    }
 	    	
 		return null;
 	}
 	
+
+	private Set<State> neighbourNodes(State current) 
+	{
+		if(current.areHandsOnTheSameGrip())
+		{
+			System.out.println("Rece na tym samym uchwycie");
+			List<Grip> feasibleGrips = model.getFeasibleGrips(current, LEG.LEFT_HAND, Configuration.radius);
+			
+			for (Grip g : feasibleGrips)
+			{
+				System.out.print(g.toString());
+			}
+		}
+		else
+		{
+			System.out.println("Rece na roznych uchwytach");
+		}
+		if(current.areFeetOnTheSameGrip())
+		{
+			System.out.println("Nogi na tym samym uchwycie");
+		}
+		else
+		{
+			System.out.println("Nogi na roznych uchwytach");
+		}
+		return null;
+	}
 
 	private Double calculateHeuristicCost(State start, State goal) 
 	{
@@ -77,7 +108,7 @@ public class AStar implements Algorithm
 	// testy
 	public void testy()
 	{
-			for (Grip g : model.getWall().getGrips().values())
+			for (Grip g : model.getWall().getGrips())
 			{
 				System.out.print(g.toString());
 			}

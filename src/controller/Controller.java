@@ -29,5 +29,6 @@ public class Controller
     {
     	//AStar algortym = new AStar(model.getWall().getStart(), model.getWall().getGoal(), model.getWall());
     	algorithm.testy();
+    	algorithm.findPath(model.getWall().getStart(), model.getWall().getGoal());
     }
 }

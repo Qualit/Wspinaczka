@@ -3,6 +3,7 @@ package controller;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,13 +13,13 @@ import model.Grip;
 
 public class InputHandler 
 {
-	private Map<Integer, Grip> grips;
+	private List<Grip> grips;
 	private int numberOfGrips;
 	private double wallHeight;
 	
 	public InputHandler() 
 	{
-		this.grips = new HashMap<Integer, Grip>();
+		this.grips = new ArrayList<Grip>();
 		this.numberOfGrips = 0;
 		this.wallHeight = 0;
 	}
@@ -70,16 +71,16 @@ public class InputHandler
 		numberOfGrips = Integer.parseInt(tokens[0]);
 		wallHeight = Double.parseDouble(tokens[1]);
 		
-		grips.put(0, new Grip(1.5 , 0.0, 2));
+		grips.add(new Grip(0, 1.5 , 0.0, 2));
 		
 		for (int i=0 ; i < numberOfGrips ; i++)
 		{
 			textLine = bufferedReader.readLine();
 			tokens = textLine.split(delims);
-			grips.put(i+1, new Grip(Double.parseDouble(tokens[0]), Double.parseDouble(tokens[1]), Double.parseDouble(tokens[2])));
+			grips.add(new Grip(i+1, Double.parseDouble(tokens[0]), Double.parseDouble(tokens[1]), Double.parseDouble(tokens[2])));
 		}
 		
-		grips.put(numberOfGrips+1, new Grip(1.5 , wallHeight, 1));
+		grips.add(new Grip(numberOfGrips+1, 1.5 , wallHeight, 1));
 
 		bufferedReader.close();
 		
@@ -98,23 +99,24 @@ public class InputHandler
 	    for(int i=0; i<n; i++)
 	    {
 		gen = GripParamsRandomGenerator.generateParams(n, w);
-		tmp.put(gen.get(GEN_PARAM.Y), new Grip(gen.get(GEN_PARAM.X), gen.get(GEN_PARAM.Y), gen.get(GEN_PARAM.COST)));
+		tmp.put(gen.get(GEN_PARAM.Y), new Grip(i, gen.get(GEN_PARAM.X), gen.get(GEN_PARAM.Y), gen.get(GEN_PARAM.COST)));
 		
 	    }
 	    
-	    grips.put(0, new Grip(1.5 , 0.0, 2));
+	    grips.add(new Grip(0, 1.5 , 0.0, 2));
 	    int j=1;
 	    for(Grip g : tmp.values())
 	    {
-		grips.put(j,g);
-		j++;
+	    	g.setIdGrip(j);
+	    	grips.add(g);
+	    	j++;
 	    }
 	    
-	    grips.put(numberOfGrips+1, new Grip(1.5 , wallHeight, 1));
+	    grips.add(new Grip(numberOfGrips+1, 1.5 , wallHeight, 1));
 		
 	}
 
-	public final Map<Integer, Grip> getGrips() 
+	public final List<Grip> getGrips() 
 	{
 		return grips;
 	}
@@ -126,7 +128,7 @@ public class InputHandler
 	{
 		return wallHeight;
 	}
-	public final void setGrips(Map<Integer, Grip> grips) 
+	public final void setGrips(List<Grip> grips) 
 	{
 		this.grips = grips;
 	}
