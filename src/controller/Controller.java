@@ -19,4 +19,10 @@ public class Controller
     	
     	this.model = new Model(inputHandler.getGrips(), inputHandler.getNumberOfGrips(), inputHandler.getWallHeight());
     }
+    
+    public void run()
+    {
+    	AStar algortym = new AStar(model.getWall().getStart(), model.getWall().getGoal(), model.getWall());
+    	algortym.testy();
+    }
 }

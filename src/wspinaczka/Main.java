@@ -11,7 +11,7 @@ import model.Wall;
 
 public class Main
 {
-    public static void main(String[] args)
+    public static void main(String[] args) throws IOException
     {
     	List<String> argsList = new ArrayList<String>();
     	for (String s : args)
@@ -19,19 +19,16 @@ public class Main
     		argsList.add(s);
     	}
     	
-    	try 
-    	{
-			final Controller controller = new Controller(argsList);
-		} catch (IOException e) 
-		{
-			System.err.println("Błąd odczytu z pliku");
-			e.printStackTrace();
-		}
+ 
+		final Controller controller = new Controller(argsList);
+		controller.run();
+
+    	
+    	
     	//final Model model = new Model(args);
 
     	// testy
     	//Wall testWall = new Wall(6, 10);
-    	//AStar algortym = new AStar(testWall.getStart(), testWall.getGoal(), testWall);
-    	//algortym.testy();
+
     }
 }

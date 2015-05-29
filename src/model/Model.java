@@ -34,5 +34,10 @@ public class Model
 	public Model(Map<Integer, Grip> grips, int numberOfGrips, double wallHeight) 
 	{
 		this.wall = new Wall(grips, numberOfGrips, wallHeight);
+		
+	}
+
+	public final Wall getWall() {
+		return wall;
 	}
 }

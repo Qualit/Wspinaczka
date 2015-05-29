@@ -16,32 +16,33 @@ public class Wall
      private final State goal; // stan koncowy
      
      // konstruktor sciany losujacy parametry
-     public Wall(Map<Integer, Grip> grips2, final int n, final double w)
+     public Wall(Map<Integer, Grip> grips, final int n, final double w)
      {
+    	 this.grips = grips;
     	 this.n = n;
     	 this.w = w;
     	 
     	 
     	 // wszystko poniezej napisane dla celow TESTOWYCH
-    	 this.grips = new HashMap<Integer, Grip>();
-    	 grips.put(new Integer(1), new Grip(1.1, 2.05, 1.5));
-    	 grips.put(new Integer(2), new Grip(2.1, 3.34, 1.12));
-    	 grips.put(new Integer(3), new Grip(2.2, 1.24, 1.27));
-    	 grips.put(new Integer(4), new Grip(1.2, 5.16, 1.7));
-    	 grips.put(new Integer(5), new Grip(2.3, 4.75, 1.05));
-
+//    	 this.grips = new HashMap<Integer, Grip>();
+//    	 grips.put(new Integer(1), new Grip(1.1, 2.05, 1.5));
+//    	 grips.put(new Integer(2), new Grip(2.1, 3.34, 1.12));
+//    	 grips.put(new Integer(3), new Grip(2.2, 1.24, 1.27));
+//    	 grips.put(new Integer(4), new Grip(1.2, 5.16, 1.7));
+//    	 grips.put(new Integer(5), new Grip(2.3, 4.75, 1.05));
+//
     	 Map<LEG, Grip> startowaMapa = new HashMap<LEG, Grip>();
     	 Map<LEG, Grip> koncowaMapa = new HashMap<LEG, Grip>();
     	 
     	 startowaMapa.put(LEG.LEFT_HAND, grips.get(1));
-    	 startowaMapa.put(LEG.RIGHT_HAND, grips.get(2));
-    	 startowaMapa.put(LEG.LEFT_FOOT, grips.get(3));
-    	 startowaMapa.put(LEG.RIGHT_FOOT, grips.get(4));
+    	 startowaMapa.put(LEG.RIGHT_HAND, grips.get(1));
+    	 startowaMapa.put(LEG.LEFT_FOOT, grips.get(0));
+    	 startowaMapa.put(LEG.RIGHT_FOOT, grips.get(0));
     	 
-    	 koncowaMapa.put(LEG.LEFT_HAND, grips.get(2));
-    	 koncowaMapa.put(LEG.RIGHT_HAND, grips.get(3));
-    	 koncowaMapa.put(LEG.LEFT_FOOT, grips.get(4));
-    	 koncowaMapa.put(LEG.RIGHT_FOOT, grips.get(5));
+    	 koncowaMapa.put(LEG.LEFT_HAND, grips.get(4));
+    	 koncowaMapa.put(LEG.RIGHT_HAND, grips.get(4));
+    	 koncowaMapa.put(LEG.LEFT_FOOT, grips.get(3));
+    	 koncowaMapa.put(LEG.RIGHT_FOOT, grips.get(3));
     	 
     	 this.start = new State(startowaMapa, null);
     	 this.goal = new State(koncowaMapa, null);

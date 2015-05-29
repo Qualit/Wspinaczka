@@ -64,11 +64,17 @@ public class InputHandler
 		BufferedReader bufferedReader = new BufferedReader(fileReader);
 		  
 		String textLine = bufferedReader.readLine();
-		do {
-			System.out.println(textLine);
-		  
-		    textLine = bufferedReader.readLine();
-		} while(textLine != null);
+		String delims = "[ ]+";
+		String[] tokens = textLine.split(delims);
+		numberOfGrips = Integer.parseInt(tokens[0]);
+		wallHeight = Double.parseDouble(tokens[1]);
+		
+		for (int i=0 ; i < numberOfGrips ; i++)
+		{
+			textLine = bufferedReader.readLine();
+			tokens = textLine.split(delims);
+			grips.put(new Integer(i), new Grip(Double.parseDouble(tokens[0]), Double.parseDouble(tokens[1]), Double.parseDouble(tokens[2])));
+		}
 
 		bufferedReader.close();
 		
