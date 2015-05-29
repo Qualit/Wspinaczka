@@ -59,16 +59,16 @@ public class AStar implements Algorithm
 		Map<LEG, Grip> jakasMapa = new HashMap<LEG, Grip>();
 		
    	 jakasMapa.put(LEG.LEFT_HAND, wall.getGrips().get(1));
-   	 jakasMapa.put(LEG.RIGHT_HAND, wall.getGrips().get(1));
-   	 jakasMapa.put(LEG.LEFT_FOOT, wall.getGrips().get(1));
-   	 jakasMapa.put(LEG.RIGHT_FOOT, wall.getGrips().get(1));
+   	 jakasMapa.put(LEG.RIGHT_HAND, wall.getGrips().get(2));
+   	 jakasMapa.put(LEG.LEFT_FOOT, wall.getGrips().get(3));
+   	 jakasMapa.put(LEG.RIGHT_FOOT, wall.getGrips().get(4));
    	 
 		Map<LEG, Grip> jakasMapa2 = new HashMap<LEG, Grip>();
 		
 	   	 jakasMapa2.put(LEG.LEFT_HAND, wall.getGrips().get(2));
 	   	 jakasMapa2.put(LEG.RIGHT_HAND, wall.getGrips().get(2));
-	   	 jakasMapa2.put(LEG.LEFT_FOOT, wall.getGrips().get(2));
-	   	 jakasMapa2.put(LEG.RIGHT_FOOT, wall.getGrips().get(2));
+	   	 jakasMapa2.put(LEG.LEFT_FOOT, wall.getGrips().get(3));
+	   	 jakasMapa2.put(LEG.RIGHT_FOOT, wall.getGrips().get(3));
 	   	 
 	   	 State jakisStan = new State(jakasMapa, null);
 	   	State jakisStan2 = new State(jakasMapa2, null);
