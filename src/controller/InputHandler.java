@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import model.Grip;
 
@@ -88,11 +89,19 @@ public class InputHandler
 	    wallHeight = w;
 	    
 	    Map<GEN_PARAM, Double> gen = new HashMap<GEN_PARAM, Double>();
+	    Map<Double, Grip> tmp = new TreeMap<Double, Grip>();
 	    
 	    for(int i=0; i<n; i++)
 	    {
 		gen = GripParamsRandomGenerator.generateParams(n, w);
-		grips.put(new Integer(i), new Grip(gen.get(GEN_PARAM.X), gen.get(GEN_PARAM.Y), gen.get(GEN_PARAM.COST)));
+		tmp.put(gen.get(GEN_PARAM.Y), new Grip(gen.get(GEN_PARAM.X), gen.get(GEN_PARAM.Y), gen.get(GEN_PARAM.COST)));
+		
+	    }
+	    int j=0;
+	    for(Grip g : tmp.values())
+	    {
+		grips.put(j,g);
+		j++;
 	    }
 		
 	}
