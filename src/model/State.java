@@ -2,11 +2,13 @@ package model;
 
 import java.util.Map;
 
+import algorithm.AbstractState;
+
 /**
  * @author mariusz
  *
  */
-public class State
+public class State implements AbstractState
 {
     // mapa wskazujaca ktora konczyna jest na ktorym uchwycie, kolejnosc LEFT_HAND, RIGHT_HAND, LEFT_FOOT, RIGHT_FOOT
     private final Map<LEG, Grip> legState;
@@ -56,6 +58,16 @@ public class State
 	    return false;
 	return true;
     }
+    
+    public String toString()
+    {
+    	StringBuilder sb = new StringBuilder();
+    	for(Grip g : legState.values())
+    	{
+    		sb.append(g.getX() + " " + g.getY() + " " + g.getCost() + " \n");
+    	}
+    	return sb.toString();
+    }
 
     public State getPrevious()
     {
@@ -67,13 +79,4 @@ public class State
         this.previous = previous;
     }
     
-    public String toString()
-    {
-    	StringBuilder sb = new StringBuilder();
-    	for(Grip g : legState.values())
-    	{
-    		sb.append(g.getX() + " " + g.getY() + " " + g.getCost() + " \n");
-    	}
-    	return sb.toString();
-    }
 }

@@ -1,6 +1,6 @@
 package model;
 
-public class Grip // implements Point (?)
+public class Grip
 {
 	private final double x;	// wspolrzedna x uchwytu
 	private final double y;	// wspolrzedna y uchwytu

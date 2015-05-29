@@ -2,6 +2,6 @@ package algorithm;
 
 public interface Algorithm
 {
-
-	public Path findPath(Point start, Point goal);
+	public Path findPath(AbstractState start, AbstractState goal);
+	public void testy();
 }
