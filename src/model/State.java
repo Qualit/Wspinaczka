@@ -16,7 +16,7 @@ public class State implements AbstractState
     private State previous;
 
     public State(Map<LEG, Grip> legState, State previous)
-    {
+    {	// TODO Auto-generated method stub
 	    super();
 	    this.legState = legState;
 	    this.previous = previous;
@@ -78,5 +78,9 @@ public class State implements AbstractState
     {
         this.previous = previous;
     }
+
+	public final Map<LEG, Grip> getLegState() {
+		return legState;
+	}
     
 }

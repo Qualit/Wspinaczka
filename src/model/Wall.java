@@ -22,15 +22,6 @@ public class Wall
     	 this.n = n;
     	 this.w = w;
     	 
-    	 
-    	 // wszystko poniezej napisane dla celow TESTOWYCH
-//    	 this.grips = new HashMap<Integer, Grip>();
-//    	 grips.put(new Integer(1), new Grip(1.1, 2.05, 1.5));
-//    	 grips.put(new Integer(2), new Grip(2.1, 3.34, 1.12));
-//    	 grips.put(new Integer(3), new Grip(2.2, 1.24, 1.27));
-//    	 grips.put(new Integer(4), new Grip(1.2, 5.16, 1.7));
-//    	 grips.put(new Integer(5), new Grip(2.3, 4.75, 1.05));
-//
     	 Map<LEG, Grip> startowaMapa = new HashMap<LEG, Grip>();
     	 Map<LEG, Grip> koncowaMapa = new HashMap<LEG, Grip>();
     	 
@@ -39,33 +30,26 @@ public class Wall
     	 startowaMapa.put(LEG.LEFT_FOOT, grips.get(0));
     	 startowaMapa.put(LEG.RIGHT_FOOT, grips.get(0));
     	 
-    	 koncowaMapa.put(LEG.LEFT_HAND, grips.get(4));
-    	 koncowaMapa.put(LEG.RIGHT_HAND, grips.get(4));
-    	 koncowaMapa.put(LEG.LEFT_FOOT, grips.get(3));
-    	 koncowaMapa.put(LEG.RIGHT_FOOT, grips.get(3));
+    	 koncowaMapa.put(LEG.LEFT_HAND, grips.get(this.n+1));
+    	 koncowaMapa.put(LEG.RIGHT_HAND, grips.get(this.n+1));
+    	 koncowaMapa.put(LEG.LEFT_FOOT, grips.get(this.n));
+    	 koncowaMapa.put(LEG.RIGHT_FOOT, grips.get(this.n));
     	 
     	 this.start = new State(startowaMapa, null);
     	 this.goal = new State(koncowaMapa, null);
      }     
-    
-	// konstruktor sciany czytajacy dane z pliku
-    public Wall(final String fileName) 
-    {
-    	this.grips = null;
-    	this.n = 0;
-    	this.w = 0;
-    	this.start = null;
-    	this.goal = null;
-		// TODO Auto-generated constructor stub
-	}
 
-
-	private  List<Grip> getFeasibleGrips(final State current, LEG activeLeg, double radius)
+	public  List<Grip> getFeasibleGrips(final State current, LEG activeLeg, double radius)
      {
     	 // dla zadanej konczyny zwraca kontener dopuszczalnych 
     	 // uchwytow do przejscia
 	 
     	 List<Grip> feasibleGrips = new ArrayList<Grip>();
+    	 
+    	 for (Grip g : grips.values())
+    	 {
+    		 feasibleGrips.add(g);
+    	 }
 	 
     	 // tutaj logika znajdowania dozwolonych wierzcholkow
     	 Collections.sort(feasibleGrips, new Comparator<Grip>() {
@@ -78,10 +62,15 @@ public class Wall
     	 return feasibleGrips;
      }
 	
-     public void getRandomGrips ()
-     {
-	 
-     }
+	
+	
+	public final int getN() {
+		return n;
+	}
+
+	public final double getW() {
+		return w;
+	}
 
 	public final Map<Integer, Grip> getGrips() {
 		return grips;
