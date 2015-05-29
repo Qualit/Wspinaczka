@@ -16,7 +16,7 @@ public class Wall
      private final State goal; // stan koncowy
      
      // konstruktor sciany losujacy parametry
-     public Wall(final int n, final double w)
+     public Wall(Map<Integer, Grip> grips2, final int n, final double w)
      {
     	 this.n = n;
     	 this.w = w;

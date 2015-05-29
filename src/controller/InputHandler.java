@@ -1,0 +1,112 @@
+package controller;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import model.Grip;
+
+public class InputHandler 
+{
+	private Map<Integer, Grip> grips;
+	private int numberOfGrips;
+	private double wallHeight;
+	
+	public InputHandler() 
+	{
+		this.grips = new HashMap<Integer, Grip>();
+		this.numberOfGrips = 0;
+		this.wallHeight = 0;
+	}
+	
+	public void prepareParameters(List<String> argsList) throws IOException 
+	{
+		switch (argsList.get(0))
+		{
+			case "r":
+				randomGrips(Integer.parseInt(argsList.get(1)), Double.parseDouble(argsList.get(2)));
+				break;
+			case "f":
+				gripsFromFile(argsList.get(1));
+				break;
+			default:
+				break;
+				
+		}
+	}
+	
+	public void prepareParametersFromGUI(List<String> argsList, INPUT_OPTION option) throws IOException
+	{
+		switch (option) {
+			case FILE:
+			{
+				gripsFromFile(argsList.get(0));
+				
+				break;
+			}
+			case RANDOM:
+			{
+				randomGrips(Integer.parseInt(argsList.get(0)), Double.parseDouble(argsList.get(1)));
+
+				break;
+			}
+			default:
+				break;
+		}
+	}
+	
+	private void gripsFromFile(String fileName) throws IOException
+	{
+		FileReader fileReader = new FileReader(fileName);
+		BufferedReader bufferedReader = new BufferedReader(fileReader);
+		  
+		String textLine = bufferedReader.readLine();
+		do {
+			System.out.println(textLine);
+		  
+		    textLine = bufferedReader.readLine();
+		} while(textLine != null);
+
+		bufferedReader.close();
+		
+	}
+
+	private void randomGrips(int parseInt, double parseDouble) 
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	public final Map<Integer, Grip> getGrips() 
+	{
+		return grips;
+	}
+	public final int getNumberOfGrips() 
+	{
+		return numberOfGrips;
+	}
+	public final double getWallHeight() 
+	{
+		return wallHeight;
+	}
+	public final void setGrips(Map<Integer, Grip> grips) 
+	{
+		this.grips = grips;
+	}
+	public final void setNumberOfGrips(int numberOfGrips) 
+	{
+		this.numberOfGrips = numberOfGrips;
+	}
+	public final void setWallHeight(double wallHeight) 
+	{
+		this.wallHeight = wallHeight;
+	}
+
+
+
+	
+
+}
