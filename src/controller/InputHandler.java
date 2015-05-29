@@ -77,6 +77,17 @@ public class InputHandler
 	private void randomGrips(int n, double w) 
 	{
 		// TODO Auto-generated method stub
+	    
+	    numberOfGrips = n;
+	    wallHeight = w;
+	    
+	    Map<GEN_PARAM, Double> gen = new HashMap<GEN_PARAM, Double>();
+	    
+	    for(int i=0; i<n; i++)
+	    {
+		gen = GripParamsRandomGenerator.generateParams(n, w);
+		grips.put(new Integer(i), new Grip(gen.get(GEN_PARAM.X), gen.get(GEN_PARAM.Y), gen.get(GEN_PARAM.COST)));
+	    }
 		
 	}
 
