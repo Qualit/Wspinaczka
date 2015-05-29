@@ -101,12 +101,16 @@ public class InputHandler
 		tmp.put(gen.get(GEN_PARAM.Y), new Grip(gen.get(GEN_PARAM.X), gen.get(GEN_PARAM.Y), gen.get(GEN_PARAM.COST)));
 		
 	    }
-	    int j=0;
+	    
+	    grips.put(0, new Grip(1.5 , 0.0, 2));
+	    int j=1;
 	    for(Grip g : tmp.values())
 	    {
 		grips.put(j,g);
 		j++;
 	    }
+	    
+	    grips.put(numberOfGrips+1, new Grip(1.5 , wallHeight, 1));
 		
 	}
 

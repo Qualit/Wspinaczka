@@ -18,7 +18,7 @@ public class Main
     	
  
 		final Controller controller = new Controller(argsList);
-		controller.run();
+		controller.work();
 
     	
     	

@@ -25,7 +25,7 @@ public class Controller
     	
     }
     
-    public void run()
+    public void work()
     {
     	//AStar algortym = new AStar(model.getWall().getStart(), model.getWall().getGoal(), model.getWall());
     	algorithm.testy();
