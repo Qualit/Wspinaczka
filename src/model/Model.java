@@ -1,10 +1,6 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 
 public class Model 
 {
@@ -16,7 +12,7 @@ public class Model
 		
 	}
 	
-	public  List<Grip> getFeasibleGrips(final State current, LEG activeLeg, double radius)
+	public List<Grip> getFeasibleGrips(final State current, LEG activeLeg, double radius)
     {
 		return wall.getFeasibleGrips(current, activeLeg, radius);
     }

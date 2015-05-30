@@ -23,17 +23,18 @@ public class Wall
     	 this.w = w;
     	 
     	 Map<LEG, Grip> startowaMapa = new HashMap<LEG, Grip>();
-    	 Map<LEG, Grip> koncowaMapa = new HashMap<LEG, Grip>();
-    	 
+    	 Map<LEG, Grip> koncowaMapa = new HashMap<LEG, Grip>();   	 
+
     	 startowaMapa.put(LEG.LEFT_HAND, grips.get(1));
     	 startowaMapa.put(LEG.RIGHT_HAND, grips.get(1));
     	 startowaMapa.put(LEG.LEFT_FOOT, grips.get(0));
     	 startowaMapa.put(LEG.RIGHT_FOOT, grips.get(0));
-    	 
+ 	 
     	 koncowaMapa.put(LEG.LEFT_HAND, grips.get(this.n+1));
     	 koncowaMapa.put(LEG.RIGHT_HAND, grips.get(this.n+1));
     	 koncowaMapa.put(LEG.LEFT_FOOT, grips.get(this.n));
     	 koncowaMapa.put(LEG.RIGHT_FOOT, grips.get(this.n));
+
     	 
     	 this.start = new State(startowaMapa, null);
     	 this.goal = new State(koncowaMapa, null);
@@ -45,16 +46,14 @@ public class Wall
     	 // uchwytow do przejscia
 	 
     	 List<Grip> feasibleGrips = new ArrayList<Grip>();
-    	 
-    	 for (Grip g : grips)
+    	 for (int i = firstFeasibleGrip(current, activeLeg) ; i<= lastFeasibleGrip(current, activeLeg) ; i++)
+//    	 for (int i = current.getLegGrip(activeLeg).getIdGrip()+1; i<=n+1 ; i++)
     	 {
-    		 feasibleGrips.add(g);
+    		 if(grips.get(i).isFeasible(current, activeLeg, radius))
+    		 {
+    			 feasibleGrips.add(grips.get(i));
+    		 }
     	 }
-    	 
-//    	 for (int i = 0; true ; i++)
-//    	 {
-//    		 
-//    	 }
 	 
     	 // tutaj logika znajdowania dozwolonych wierzcholkow
     	 Collections.sort(feasibleGrips, new Comparator<Grip>() {
@@ -67,25 +66,75 @@ public class Wall
     	 return feasibleGrips;
      }
 	
+	private int firstFeasibleGrip(State current, LEG activeLeg) 
+	{
+		return current.getLegGrip(activeLeg).getIdGrip()+1;
+	}
 	
-	
-	public final int getN() {
+	private int lastFeasibleGrip(State current, LEG activeLeg) 
+	{
+		switch (activeLeg)
+		{
+			case LEFT_HAND:
+			{
+				return (this.n+1);
+			}
+			case RIGHT_HAND:
+			{
+				return (this.n+1);
+			}
+			case LEFT_FOOT:
+			{
+				if(current.getLegGrip(LEG.LEFT_HAND).getIdGrip() <= current.getLegGrip(LEG.RIGHT_HAND).getIdGrip())
+				{
+					return current.getLegGrip(LEG.LEFT_HAND).getIdGrip()-1;
+				}
+				else
+				{
+					return current.getLegGrip(LEG.RIGHT_HAND).getIdGrip()-1;
+				}
+			}
+			case RIGHT_FOOT:
+			{
+				if(current.getLegGrip(LEG.LEFT_HAND).getIdGrip() <= current.getLegGrip(LEG.RIGHT_HAND).getIdGrip())
+				{
+					return current.getLegGrip(LEG.LEFT_HAND).getIdGrip()-1;
+				}
+				else
+				{
+					return current.getLegGrip(LEG.RIGHT_HAND).getIdGrip()-1;
+				}
+			}
+			default:
+			{
+				System.exit(1);
+				return 0;
+			}
+		}
+	}
+
+	public final int getN() 
+	{
 		return n;
 	}
 
-	public final double getW() {
+	public final double getW() 
+	{
 		return w;
 	}
 
-	public final List<Grip> getGrips() {
+	public final List<Grip> getGrips() 
+	{
 		return grips;
 	}
 
-	public final State getStart() {
+	public final State getStart() 
+	{
 		return start;
 	}
 
-	public final State getGoal() {
+	public final State getGoal() 
+	{
 		return goal;
 	}
 }

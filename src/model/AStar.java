@@ -6,14 +6,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
 import wspinaczka.Configuration;
 
 import algorithm.AbstractState;
 import algorithm.Algorithm;
 import algorithm.Path;
-
 
 // TODO --> this will be algorithm implementation
 public class AStar implements Algorithm 
@@ -57,52 +55,125 @@ public class AStar implements Algorithm
 	    	}
 	    	current = sortedFScore.get(sortedFScore.firstKey()); // stan z namniejszą wartoscia fScore
 	    	
-	    	if (current == goal)
+	    	if (current.equals(goal))
 	    	{
+	    		return new DonePath((State) start, (State) current);
 	    		//return new Path; 	// do zrobienia
 	    	}
 	    	
 	    	openSet.remove(current);
+	    	fScore.remove(current);
 	    	closedSet.add(current);
 	    	
-	    	Set<State> neighbourNodes = new HashSet<State>();
-	    	neighbourNodes = neighbourNodes(current);
+	    	Map<State, Double> neighbourNodesAndCosts = new HashMap<State, Double>();
+	    	neighbourNodesAndCosts = neighbourNodes(current);
+	    	
+	    	for (State neightbour : neighbourNodesAndCosts.keySet())
+	    	{
+	    		//System.out.println(neightbour.toString());
+	    		
+	    		if(closedSet.contains(neightbour))
+	    		{
+	    			continue;
+	    		}
+	    		
+	    		Double tentativeGScore = gScore.get(current) + neighbourNodesAndCosts.get(neightbour);
+	    		
+	    		if(!openSet.contains(neightbour))
+	    		{
+	    			neightbour.setPrevious(current);
+	    			gScore.put(neightbour, tentativeGScore);
+	    			fScore.put(neightbour, gScore.get(neightbour) + calculateHeuristicCost(neightbour, (State)goal));
+	    			openSet.add(neightbour);
+	    		}
+	    		else
+	    		{
+	    			if(tentativeGScore < gScore.get(neightbour))
+	    			{
+		    			neightbour.setPrevious(current);
+		    			gScore.put(neightbour, tentativeGScore);
+		    			fScore.put(neightbour, gScore.get(neightbour) + calculateHeuristicCost(neightbour, (State)goal));
+	    			}
+	    		}
+	    		
+	    	}
 	    }
 	    	
 		return null;
 	}
 	
 
-	private Set<State> neighbourNodes(State current) 
+	private Double costBetween(State currentState, State neightbour) 
 	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private Map<State, Double> neighbourNodes(State current) 
+	{
+		final Map<State, Double> neighbourNodesAndCosts = new HashMap<State, Double>();
 		if(current.areHandsOnTheSameGrip())
 		{
-			System.out.println("Rece na tym samym uchwycie");
-			List<Grip> feasibleGrips = model.getFeasibleGrips(current, LEG.LEFT_HAND, Configuration.radius);
+//			System.out.println("Rece na tym samym uchwycie");
 			
-			for (Grip g : feasibleGrips)
-			{
-				System.out.print(g.toString());
-			}
+			List<Grip> feasibleGrips = model.getFeasibleGrips(current, LEG.LEFT_HAND, Configuration.radius);
+			creatingNeighbouringStates(neighbourNodesAndCosts, feasibleGrips, current, LEG.LEFT_HAND);
+			
+//			List<Grip> feasibleGrips2 = model.getFeasibleGrips(current, LEG.RIGHT_HAND, Configuration.radius);
+//			creatingNeighbouringStates(neighbourNodesAndCosts, feasibleGrips2, current, LEG.RIGHT_HAND);
+			
 		}
 		else
 		{
-			System.out.println("Rece na roznych uchwytach");
+//			System.out.println("Rece na roznych uchwytach");
+			
+			List<Grip> feasibleGrips = model.getFeasibleGrips(current, LEG.LEFT_HAND, Configuration.radius);
+			creatingNeighbouringStates(neighbourNodesAndCosts, feasibleGrips, current, LEG.LEFT_HAND);
+			
+			List<Grip> feasibleGrips2 = model.getFeasibleGrips(current, LEG.RIGHT_HAND, Configuration.radius);
+			creatingNeighbouringStates(neighbourNodesAndCosts, feasibleGrips2, current, LEG.RIGHT_HAND);
 		}
 		if(current.areFeetOnTheSameGrip())
 		{
-			System.out.println("Nogi na tym samym uchwycie");
+//			System.out.println("Nogi na tym samym uchwycie");
+			List<Grip> feasibleGrips = model.getFeasibleGrips(current, LEG.LEFT_FOOT, Configuration.radius);
+			creatingNeighbouringStates(neighbourNodesAndCosts, feasibleGrips, current, LEG.LEFT_FOOT);
+			
+//			List<Grip> feasibleGrips2 = model.getFeasibleGrips(current, LEG.RIGHT_FOOT, Configuration.radius);
+//			creatingNeighbouringStates(neighbourNodesAndCosts, feasibleGrips2, current, LEG.RIGHT_FOOT);
 		}
 		else
 		{
-			System.out.println("Nogi na roznych uchwytach");
+//			System.out.println("Nogi na roznych uchwytach");
+			List<Grip> feasibleGrips = model.getFeasibleGrips(current, LEG.LEFT_FOOT, Configuration.radius);
+			creatingNeighbouringStates(neighbourNodesAndCosts, feasibleGrips, current, LEG.LEFT_FOOT);
+			
+			List<Grip> feasibleGrips2 = model.getFeasibleGrips(current, LEG.RIGHT_FOOT, Configuration.radius);
+			creatingNeighbouringStates(neighbourNodesAndCosts, feasibleGrips2, current, LEG.RIGHT_FOOT);
+			
 		}
-		return null;
+		return neighbourNodesAndCosts;
+	}
+
+	private void creatingNeighbouringStates(Map<State, Double> neighbourNodes, List<Grip> feasibleGrips, State currentState, LEG activeLeg) 
+	{
+		for (Grip g : feasibleGrips)
+		{
+			Map<LEG, Grip> newLegState = new HashMap<LEG, Grip>();
+			//newLegState.putAll(currentState.getLegState());
+			newLegState.put(LEG.LEFT_HAND, currentState.getLegGrip(LEG.LEFT_HAND));
+			newLegState.put(LEG.RIGHT_HAND, currentState.getLegGrip(LEG.RIGHT_HAND));
+			newLegState.put(LEG.LEFT_FOOT, currentState.getLegGrip(LEG.LEFT_FOOT));
+			newLegState.put(LEG.RIGHT_FOOT, currentState.getLegGrip(LEG.RIGHT_FOOT));
+			newLegState.put(activeLeg, g);
+			neighbourNodes.put(new State(newLegState, null), g.getCost());
+		}
+		
 	}
 
 	private Double calculateHeuristicCost(State start, State goal) 
 	{
-		return model.getWall().getW()- start.getLegState().get(LEG.LEFT_FOOT).getY(); // ZLE TYMCZASOWE
+		return (model.getWall().getW()- start.getLegState().get(LEG.LEFT_FOOT).getY())*2; // ZLE TYMCZASOWE
 	}
 
 	// testy

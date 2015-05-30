@@ -16,8 +16,49 @@ public class Grip
 	    this.cost = cost;
 	}
 	
+	public boolean isFeasible(State current, LEG activeLeg, double radius) 
+	{
+		switch (activeLeg)
+		{
+			case LEFT_HAND:
+			{
+				return isRealyFeasible(current.getLegGrip(LEG.RIGHT_HAND), radius) & 
+					   isRealyFeasible(current.getLegGrip(LEG.LEFT_FOOT), radius) & 
+					   isRealyFeasible(current.getLegGrip(LEG.RIGHT_FOOT), radius);
+			}
+			case RIGHT_HAND:
+			{
+				return isRealyFeasible(current.getLegGrip(LEG.LEFT_HAND), radius) & 
+					   isRealyFeasible(current.getLegGrip(LEG.LEFT_FOOT), radius) & 
+					   isRealyFeasible(current.getLegGrip(LEG.RIGHT_FOOT), radius);
+			}
+			case LEFT_FOOT:
+			{
+				return isRealyFeasible(current.getLegGrip(LEG.RIGHT_HAND), radius) & 
+					   isRealyFeasible(current.getLegGrip(LEG.LEFT_HAND), radius) & 
+					   isRealyFeasible(current.getLegGrip(LEG.RIGHT_FOOT), radius);
+			}
+			case RIGHT_FOOT:
+			{
+				return isRealyFeasible(current.getLegGrip(LEG.RIGHT_HAND), radius) & 
+					   isRealyFeasible(current.getLegGrip(LEG.LEFT_FOOT), radius) & 
+					   isRealyFeasible(current.getLegGrip(LEG.LEFT_HAND), radius);
+			}
+			default:
+			{
+				return false;
+			}
+		}
+	}
+	
+	private boolean isRealyFeasible(Grip legGrip, double radius) 
+	{
+		return (Math.sqrt(Math.pow(x-legGrip.getX(), 2) + Math.pow(y-legGrip.getY(), 2))) <= radius;
+	}
+
 	@Override
-	public int hashCode() {
+	public int hashCode() 
+	{
 		final int prime = 15485857;
 		int result = 1;
 		long temp;
@@ -31,10 +72,9 @@ public class Grip
 		return result;
 	}
 
-
-
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(Object obj) 
+	{
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -53,8 +93,6 @@ public class Grip
 		return true;
 	}
 
-
-
 	public String toString()
 	{
     	StringBuilder sb = new StringBuilder();
@@ -64,7 +102,7 @@ public class Grip
     	return sb.toString();
 	}
 	
-	public double getIdGrip()
+	public int getIdGrip()
 	{
 	    return idGrip;
 	}

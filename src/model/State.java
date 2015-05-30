@@ -43,9 +43,28 @@ public class State implements AbstractState
     	int hash=0;
     	int i=1;
 	
-    	for (Grip g : legState.values())
+    	for (LEG l : legState.keySet())
     	{
-    		hash+=g.hashCode()/i;		// zamiana *i na /i => mnozenie powodowalo wypadanie poza zakres inta co dalej powodowalo ze rozne stany mialy takie same hashe
+    		switch (l)
+    		{
+    		case LEFT_HAND:
+    			i=1;
+    			break;
+    		case RIGHT_HAND:
+    			i=2;
+    			break;
+    		case LEFT_FOOT:
+    			i=3;
+    			break;
+    		case RIGHT_FOOT:
+    			i=4;
+    			break;
+    		default:
+    			i=1;
+    			break;
+    			
+    		}
+    		hash+=legState.get(l).hashCode()/i;		// zamiana *i na /i => mnozenie powodowalo wypadanie poza zakres inta co dalej powodowalo ze rozne stany mialy takie same hashe
     		i++;
     	}
     	return hash;
@@ -65,7 +84,11 @@ public class State implements AbstractState
 	{
 	    if (other.legState != null)
 		return false;
-	} else if (!legState.equals(other.legState))
+	    
+	} else if (legState.get(LEG.LEFT_HAND).hashCode() != other.legState.get(LEG.LEFT_HAND).hashCode() |
+				legState.get(LEG.RIGHT_HAND).hashCode() != other.legState.get(LEG.RIGHT_HAND).hashCode() |
+				legState.get(LEG.LEFT_FOOT).hashCode() != other.legState.get(LEG.LEFT_FOOT).hashCode() |
+				legState.get(LEG.RIGHT_FOOT).hashCode() != other.legState.get(LEG.RIGHT_FOOT).hashCode())
 	    return false;
 	return true;
     }
@@ -73,9 +96,10 @@ public class State implements AbstractState
     public String toString()
     {
     	StringBuilder sb = new StringBuilder();
-    	for(Grip g : legState.values())
+    	sb.append("hasz= " + hashCode() + "\n");
+    	for(LEG l : legState.keySet())
     	{
-    		sb.append(g.getX() + " " + g.getY() + " " + g.getCost() + " \n");
+    		sb.append(l + " " + legState.get(l).toString());
     	}
     	return sb.toString();
     }
@@ -93,5 +117,10 @@ public class State implements AbstractState
 	public final Map<LEG, Grip> getLegState() 
 	{
 		return legState;
+	}
+
+	public Grip getLegGrip(LEG activeLeg) 
+	{
+		return legState.get(activeLeg);
 	}
 }
