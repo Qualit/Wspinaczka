@@ -22,7 +22,7 @@ public class Main
     				"Reading data from file:\t\tf [file name]");
 
     	final Controller controller = new Controller(argsList);
-		controller.work();
+		controller.displayLogs();
 
 		//final Model model = new Model(args);
 

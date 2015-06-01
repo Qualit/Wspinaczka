@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 import algorithm.Path;
 
 public class DonePath extends Path 
@@ -13,16 +15,20 @@ public class DonePath extends Path
 		this.start = start;
 		this.goal = goal;
 	}
-	
+
 	@Override
 	public void showPath()
 	{
+		ArrayList<State> list = new ArrayList<State>();
 		State now = goal;
-		while(now != null)
+
+		while (now != null)
 		{
-			System.out.println(now.toString());
+			list.add(now);
 			now = now.getPrevious();
 		}
-	}
 
+		for (int i = list.size()-1; i >= 0; i--)
+			System.out.println(list.get(i));
+	}
 }
