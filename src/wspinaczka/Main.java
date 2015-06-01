@@ -15,17 +15,18 @@ public class Main
     	{
     		argsList.add(s);
     	}
-    	
- 
-		final Controller controller = new Controller(argsList);
-		controller.work();
 
-    	
-    	
-    	//final Model model = new Model(args);
+    	if (argsList.isEmpty())
+    		throw new IOException("Wrong number of parameters\n" +
+    				"Random grips generating:\tr [number of grips] [wall height]\n" +
+    				"Reading data from file:\t\tf [file name]");
+
+    	final Controller controller = new Controller(argsList);
+		controller.displayLogs();
+
+		//final Model model = new Model(args);
 
     	// testy
     	//Wall testWall = new Wall(6, 10);
-
     }
 }

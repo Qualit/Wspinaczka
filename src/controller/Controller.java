@@ -3,18 +3,14 @@ package controller;
 import java.io.IOException;
 import java.util.List;
 
-import algorithm.Algorithm;
-import algorithm.Path;
-
-import model.AStar;
-import model.DonePath;
-import model.Model;
+import algorithm.*;
+import model.*;
 
 public class Controller
 {
-    private final Model model; // sciana 
-    private final InputHandler inputHandler; // obsluga wejscia
-    private final Algorithm algorithm; // pole klasy implementujacej interfejs Algorithm
+    private final Model model;					// sciana 
+    private final InputHandler inputHandler;	// obsluga wejscia
+    private final Algorithm algorithm;			// pole klasy implementujacej interfejs Algorithm
 
     public Controller(List<String> argsList) throws IOException
     {
@@ -26,15 +22,17 @@ public class Controller
     	this.algorithm = new AStar(model);
     	
     }
-    
-    public void work()
+
+    public void displayLogs()
     {
     	//AStar algortym = new AStar(model.getWall().getStart(), model.getWall().getGoal(), model.getWall());
     	System.out.println(model.getWall().getStart().toString());
     	System.out.println(model.getWall().getGoal().toString());
-    	algorithm.testy();
+
+    	algorithm.printGrips();
     	Path path = algorithm.findPath(model.getWall().getStart(), model.getWall().getGoal());
-    	if(path != null)
+
+    	if (path != null)
     		path.showPath();
     }
 }

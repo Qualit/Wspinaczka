@@ -1,22 +1,11 @@
 package model;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-
+import java.util.*;
+import algorithm.*;
 import wspinaczka.Configuration;
 
-import algorithm.AbstractState;
-import algorithm.Algorithm;
-import algorithm.Path;
-
-// TODO --> this will be algorithm implementation
 public class AStar implements Algorithm 
 {
-    
     	private final Model model;
     	private final Set<State> openSet;  // zbior stanow otwartych
     	private final Set<State> closedSet; // zbior stanow zamknietych
@@ -25,11 +14,9 @@ public class AStar implements Algorithm
 //    	private final State start; // stan poczatkowy
 //    	private final State goal; // stan koncowy
     	private State current;
-    	
 
 	public AStar(Model model) 
 	{
-	    super();
 	    this.model = model;
 	    this.openSet = new HashSet<State>();
 	    this.closedSet = new HashSet<State>();
@@ -101,7 +88,6 @@ public class AStar implements Algorithm
 	    	
 		return null;
 	}
-	
 
 	private Double costBetween(State currentState, State neightbour) 
 	{
@@ -177,13 +163,10 @@ public class AStar implements Algorithm
 	}
 
 	// testy
-	public void testy()
+	@Override
+	public void printGrips()
 	{
-			for (Grip g : model.getWall().getGrips())
-			{
-				System.out.print(g.toString());
-			}
-			
+		for (Grip g : model.getWall().getGrips())
+			System.out.print(g.toString());
 	}
-
 }
