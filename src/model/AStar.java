@@ -100,18 +100,13 @@ public class AStar implements Algorithm
 		final Map<State, Double> neighbourNodesAndCosts = new HashMap<State, Double>();
 		if(current.areHandsOnTheSameGrip())
 		{
-//			System.out.println("Rece na tym samym uchwycie");
 			
 			List<Grip> feasibleGrips = model.getFeasibleGrips(current, LEG.LEFT_HAND, Configuration.radius);
 			creatingNeighbouringStates(neighbourNodesAndCosts, feasibleGrips, current, LEG.LEFT_HAND);
 			
-//			List<Grip> feasibleGrips2 = model.getFeasibleGrips(current, LEG.RIGHT_HAND, Configuration.radius);
-//			creatingNeighbouringStates(neighbourNodesAndCosts, feasibleGrips2, current, LEG.RIGHT_HAND);
-			
 		}
 		else
 		{
-//			System.out.println("Rece na roznych uchwytach");
 			
 			List<Grip> feasibleGrips = model.getFeasibleGrips(current, LEG.LEFT_HAND, Configuration.radius);
 			creatingNeighbouringStates(neighbourNodesAndCosts, feasibleGrips, current, LEG.LEFT_HAND);
@@ -121,16 +116,12 @@ public class AStar implements Algorithm
 		}
 		if(current.areFeetOnTheSameGrip())
 		{
-//			System.out.println("Nogi na tym samym uchwycie");
 			List<Grip> feasibleGrips = model.getFeasibleGrips(current, LEG.LEFT_FOOT, Configuration.radius);
 			creatingNeighbouringStates(neighbourNodesAndCosts, feasibleGrips, current, LEG.LEFT_FOOT);
 			
-//			List<Grip> feasibleGrips2 = model.getFeasibleGrips(current, LEG.RIGHT_FOOT, Configuration.radius);
-//			creatingNeighbouringStates(neighbourNodesAndCosts, feasibleGrips2, current, LEG.RIGHT_FOOT);
 		}
 		else
 		{
-//			System.out.println("Nogi na roznych uchwytach");
 			List<Grip> feasibleGrips = model.getFeasibleGrips(current, LEG.LEFT_FOOT, Configuration.radius);
 			creatingNeighbouringStates(neighbourNodesAndCosts, feasibleGrips, current, LEG.LEFT_FOOT);
 			
@@ -146,7 +137,7 @@ public class AStar implements Algorithm
 		for (Grip g : feasibleGrips)
 		{
 			Map<LEG, Grip> newLegState = new HashMap<LEG, Grip>();
-			//newLegState.putAll(currentState.getLegState());
+//			newLegState.putAll(currentState.getLegState());
 			newLegState.put(LEG.LEFT_HAND, currentState.getLegGrip(LEG.LEFT_HAND));
 			newLegState.put(LEG.RIGHT_HAND, currentState.getLegGrip(LEG.RIGHT_HAND));
 			newLegState.put(LEG.LEFT_FOOT, currentState.getLegGrip(LEG.LEFT_FOOT));
@@ -168,5 +159,12 @@ public class AStar implements Algorithm
 	{
 		for (Grip g : model.getWall().getGrips())
 			System.out.print(g.toString());
+	}
+	
+	public void printGrips2()
+	{
+		System.out.println(model.getWall().getN() + " " + model.getWall().getW());
+		for (Grip g : model.getWall().getGrips())
+			System.out.print(g.toString2());
 	}
 }

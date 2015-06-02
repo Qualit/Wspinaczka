@@ -46,7 +46,8 @@ public class Wall
     	 // uchwytow do przejscia
 	 
     	 List<Grip> feasibleGrips = new ArrayList<Grip>();
-    	 for (int i = firstFeasibleGrip(current, activeLeg) ; i<= lastFeasibleGrip(current, activeLeg) ; i++)
+    	 for (int i = firstFeasibleGrip(current, activeLeg) ; isStillFeasible(current, activeLeg, i, radius) ; i++)
+//    	 for (int i = firstFeasibleGrip(current, activeLeg) ; lastFeasibleGrip(current, activeLeg, radius) ; i++)
 //    	 for (int i = current.getLegGrip(activeLeg).getIdGrip()+1; i<=n+1 ; i++)
     	 {
     		 if(grips.get(i).isFeasible(current, activeLeg, radius))
@@ -66,52 +67,112 @@ public class Wall
     	 return feasibleGrips;
      }
 	
-	private int firstFeasibleGrip(State current, LEG activeLeg) 
-	{
-		return current.getLegGrip(activeLeg).getIdGrip()+1;
-	}
-	
-	private int lastFeasibleGrip(State current, LEG activeLeg) 
+	private boolean isStillFeasible(State current, LEG activeLeg, int i, double radius) 
 	{
 		switch (activeLeg)
 		{
 			case LEFT_HAND:
 			{
-				return (this.n+1);
+				if(i > n+1)
+				{
+					return false;
+				}
+				if(grips.get(i).getY() - current.getLegGrip(activeLeg).getY() <= radius)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
 			}
 			case RIGHT_HAND:
 			{
-				return (this.n+1);
-			}
-			case LEFT_FOOT:
-			{
-				if(current.getLegGrip(LEG.LEFT_HAND).getIdGrip() <= current.getLegGrip(LEG.RIGHT_HAND).getIdGrip())
+				if(i > n+1)
 				{
-					return current.getLegGrip(LEG.LEFT_HAND).getIdGrip()-1;
+					return false;
+				}
+				if(grips.get(i).getY() - current.getLegGrip(activeLeg).getY() <= radius)
+				{
+					return true;
 				}
 				else
 				{
-					return current.getLegGrip(LEG.RIGHT_HAND).getIdGrip()-1;
+					return false;
 				}
 			}
-			case RIGHT_FOOT:
+			case LEFT_FOOT:	// nie wyzej niz rece
 			{
 				if(current.getLegGrip(LEG.LEFT_HAND).getIdGrip() <= current.getLegGrip(LEG.RIGHT_HAND).getIdGrip())
 				{
-					return current.getLegGrip(LEG.LEFT_HAND).getIdGrip()-1;
+					if(i < current.getLegGrip(LEG.LEFT_HAND).getIdGrip())
+					{
+						return true;
+					}
+					else
+					{
+						return false;
+					}
 				}
 				else
 				{
-					return current.getLegGrip(LEG.RIGHT_HAND).getIdGrip()-1;
+					if(i < current.getLegGrip(LEG.RIGHT_HAND).getIdGrip())
+					{
+						return true;
+					}
+					else
+					{
+						return false;
+					}
+				}
+			}
+			case RIGHT_FOOT: // nie wyzej niz rece
+			{
+				if(current.getLegGrip(LEG.LEFT_HAND).getIdGrip() <= current.getLegGrip(LEG.RIGHT_HAND).getIdGrip())
+				{
+					if(i < current.getLegGrip(LEG.LEFT_HAND).getIdGrip())
+					{
+						return true;
+					}
+					else
+					{
+						return false;
+					}
+				}
+				else
+				{
+					if(i < current.getLegGrip(LEG.RIGHT_HAND).getIdGrip())
+					{
+						return true;
+					}
+					else
+					{
+						return false;
+					}
 				}
 			}
 			default:
 			{
 				System.exit(1);
-				return 0;
+				return false;
 			}
 		}
 	}
+
+	private int firstFeasibleGrip(State current, LEG activeLeg) 
+	{
+		return current.getLegGrip(activeLeg).getIdGrip()+1;
+	}
+//	
+//	private int lastFeasibleGrip(State current, LEG activeLeg, double radius) 
+//	{
+//
+//	}
+
+//	private int gripLessThen2MetersAway(double currentLegY, Grip lowestGrip, Grip highestGrip, double radius) 
+//	{
+//
+//	}
 
 	public final int getN() 
 	{

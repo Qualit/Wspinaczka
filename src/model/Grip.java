@@ -51,7 +51,7 @@ public class Grip
 		}
 	}
 	
-	private boolean isRealyFeasible(Grip legGrip, double radius) 
+	public boolean isRealyFeasible(Grip legGrip, double radius) 
 	{
 		return (Math.sqrt(Math.pow(x-legGrip.getX(), 2) + Math.pow(y-legGrip.getY(), 2))) <= radius;
 	}
@@ -98,6 +98,15 @@ public class Grip
     	StringBuilder sb = new StringBuilder();
 
     	sb.append("id=" + idGrip  +" x=" +x + " y=" + y + " cost=" + cost + " \n");
+
+    	return sb.toString();
+	}
+	
+	public String toString2()
+	{
+    	StringBuilder sb = new StringBuilder();
+
+    	sb.append(x + " " + y + " " + cost + "\n");
 
     	return sb.toString();
 	}
