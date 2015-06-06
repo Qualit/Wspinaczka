@@ -1,5 +1,7 @@
 package model;
 
+import wspinaczka.Configuration;
+
 public class Grip
 {
 	private int idGrip; // nr kolejny uchwytu
@@ -16,33 +18,33 @@ public class Grip
 	    this.cost = cost;
 	}
 	
-	public boolean isFeasible(State current, LEG activeLeg, double radius) 
+	public boolean isFeasible(State current, LEG activeLeg) 
 	{
 		switch (activeLeg)
 		{
 			case LEFT_HAND:
 			{
-				return isRealyFeasible(current.getLegGrip(LEG.RIGHT_HAND), radius) & 
-					   isRealyFeasible(current.getLegGrip(LEG.LEFT_FOOT), radius) & 
-					   isRealyFeasible(current.getLegGrip(LEG.RIGHT_FOOT), radius);
+				return isRealyFeasible(current.getLegGrip(LEG.RIGHT_HAND)) & 
+					   isRealyFeasible(current.getLegGrip(LEG.LEFT_FOOT)) & 
+					   isRealyFeasible(current.getLegGrip(LEG.RIGHT_FOOT));
 			}
 			case RIGHT_HAND:
 			{
-				return isRealyFeasible(current.getLegGrip(LEG.LEFT_HAND), radius) & 
-					   isRealyFeasible(current.getLegGrip(LEG.LEFT_FOOT), radius) & 
-					   isRealyFeasible(current.getLegGrip(LEG.RIGHT_FOOT), radius);
+				return isRealyFeasible(current.getLegGrip(LEG.LEFT_HAND)) & 
+					   isRealyFeasible(current.getLegGrip(LEG.LEFT_FOOT)) & 
+					   isRealyFeasible(current.getLegGrip(LEG.RIGHT_FOOT));
 			}
 			case LEFT_FOOT:
 			{
-				return isRealyFeasible(current.getLegGrip(LEG.RIGHT_HAND), radius) & 
-					   isRealyFeasible(current.getLegGrip(LEG.LEFT_HAND), radius) & 
-					   isRealyFeasible(current.getLegGrip(LEG.RIGHT_FOOT), radius);
+				return isRealyFeasible(current.getLegGrip(LEG.RIGHT_HAND)) & 
+					   isRealyFeasible(current.getLegGrip(LEG.LEFT_HAND)) & 
+					   isRealyFeasible(current.getLegGrip(LEG.RIGHT_FOOT));
 			}
 			case RIGHT_FOOT:
 			{
-				return isRealyFeasible(current.getLegGrip(LEG.RIGHT_HAND), radius) & 
-					   isRealyFeasible(current.getLegGrip(LEG.LEFT_FOOT), radius) & 
-					   isRealyFeasible(current.getLegGrip(LEG.LEFT_HAND), radius);
+				return isRealyFeasible(current.getLegGrip(LEG.RIGHT_HAND)) & 
+					   isRealyFeasible(current.getLegGrip(LEG.LEFT_FOOT)) & 
+					   isRealyFeasible(current.getLegGrip(LEG.LEFT_HAND));
 			}
 			default:
 			{
@@ -51,9 +53,9 @@ public class Grip
 		}
 	}
 	
-	public boolean isRealyFeasible(Grip legGrip, double radius) 
+	public boolean isRealyFeasible(Grip legGrip) 
 	{
-		return (Math.sqrt(Math.pow(x-legGrip.getX(), 2) + Math.pow(y-legGrip.getY(), 2))) <= radius;
+		return (Math.sqrt(Math.pow(x-legGrip.getX(), 2) + Math.pow(y-legGrip.getY(), 2))) <= Configuration.radius;
 	}
 
 	@Override

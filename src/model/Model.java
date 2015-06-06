@@ -14,7 +14,7 @@ public class Model
 	
 	public List<Grip> getFeasibleGrips(final State current, LEG activeLeg, double radius)
     {
-		return wall.getFeasibleGrips(current, activeLeg, radius);
+		return wall.getFeasibleGrips(current, activeLeg);
     }
 
 	public final Wall getWall() 

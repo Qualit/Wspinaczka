@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Collections;
 
+import wspinaczka.Configuration;
+
 public class Wall
 {
      private final List<Grip> grips; // uchwyty na scianie
@@ -40,17 +42,17 @@ public class Wall
     	 this.goal = new State(koncowaMapa, null);
      }     
 
-	public  List<Grip> getFeasibleGrips(final State current, LEG activeLeg, double radius)
+	public  List<Grip> getFeasibleGrips(final State current, LEG activeLeg)
      {
     	 // dla zadanej konczyny zwraca kontener dopuszczalnych 
     	 // uchwytow do przejscia
 	 
     	 List<Grip> feasibleGrips = new ArrayList<Grip>();
-    	 for (int i = firstFeasibleGrip(current, activeLeg) ; isStillFeasible(current, activeLeg, i, radius) ; i++)
+    	 for (int i = firstProbableGrip(current, activeLeg) ; isStillProbable(current, activeLeg, i) ; i++)
 //    	 for (int i = firstFeasibleGrip(current, activeLeg) ; lastFeasibleGrip(current, activeLeg, radius) ; i++)
 //    	 for (int i = current.getLegGrip(activeLeg).getIdGrip()+1; i<=n+1 ; i++)
     	 {
-    		 if(grips.get(i).isFeasible(current, activeLeg, radius))
+    		 if(grips.get(i).isFeasible(current, activeLeg))
     		 {
     			 feasibleGrips.add(grips.get(i));
     		 }
@@ -67,7 +69,7 @@ public class Wall
     	 return feasibleGrips;
      }
 	
-	private boolean isStillFeasible(State current, LEG activeLeg, int i, double radius) 
+	private boolean isStillProbable(State current, LEG activeLeg, int i) 
 	{
 		switch (activeLeg)
 		{
@@ -77,7 +79,7 @@ public class Wall
 				{
 					return false;
 				}
-				if(grips.get(i).getY() - current.getLegGrip(activeLeg).getY() <= radius)
+				if(grips.get(i).getY() - current.getLegGrip(activeLeg).getY() <= Configuration.radius)
 				{
 					return true;
 				}
@@ -92,7 +94,7 @@ public class Wall
 				{
 					return false;
 				}
-				if(grips.get(i).getY() - current.getLegGrip(activeLeg).getY() <= radius)
+				if(grips.get(i).getY() - current.getLegGrip(activeLeg).getY() <= Configuration.radius)
 				{
 					return true;
 				}
@@ -159,7 +161,7 @@ public class Wall
 		}
 	}
 
-	private int firstFeasibleGrip(State current, LEG activeLeg) 
+	private int firstProbableGrip(State current, LEG activeLeg) 
 	{
 		return current.getLegGrip(activeLeg).getIdGrip()+1;
 	}

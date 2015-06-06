@@ -55,31 +55,31 @@ public class AStar implements Algorithm
 	    	Map<State, Double> neighbourNodesAndCosts = new HashMap<State, Double>();
 	    	neighbourNodesAndCosts = neighbourNodes(current);
 	    	
-	    	for (State neightbour : neighbourNodesAndCosts.keySet())
+	    	for (State neighbour : neighbourNodesAndCosts.keySet())
 	    	{
 	    		//System.out.println(neightbour.toString());
 	    		
-	    		if(closedSet.contains(neightbour))
+	    		if(closedSet.contains(neighbour))
 	    		{
 	    			continue;
 	    		}
 	    		
-	    		Double tentativeGScore = gScore.get(current) + neighbourNodesAndCosts.get(neightbour);
+	    		Double tentativeGScore = gScore.get(current) + neighbourNodesAndCosts.get(neighbour);
 	    		
-	    		if(!openSet.contains(neightbour))
+	    		if(!openSet.contains(neighbour))
 	    		{
-	    			neightbour.setPrevious(current);
-	    			gScore.put(neightbour, tentativeGScore);
-	    			fScore.put(neightbour, gScore.get(neightbour) + calculateHeuristicCost(neightbour, (State)goal));
-	    			openSet.add(neightbour);
+	    			neighbour.setPrevious(current);
+	    			gScore.put(neighbour, tentativeGScore);
+	    			fScore.put(neighbour, gScore.get(neighbour) + calculateHeuristicCost(neighbour, (State)goal));
+	    			openSet.add(neighbour);
 	    		}
 	    		else
 	    		{
-	    			if(tentativeGScore < gScore.get(neightbour))
+	    			if(tentativeGScore < gScore.get(neighbour))
 	    			{
-		    			neightbour.setPrevious(current);
-		    			gScore.put(neightbour, tentativeGScore);
-		    			fScore.put(neightbour, gScore.get(neightbour) + calculateHeuristicCost(neightbour, (State)goal));
+		    			neighbour.setPrevious(current);
+		    			gScore.put(neighbour, tentativeGScore);
+		    			fScore.put(neighbour, gScore.get(neighbour) + calculateHeuristicCost(neighbour, (State)goal));
 	    			}
 	    		}
 	    		
@@ -89,11 +89,11 @@ public class AStar implements Algorithm
 		return null;
 	}
 
-	private Double costBetween(State currentState, State neightbour) 
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	private Double costBetween(State currentState, State neightbour) 
+//	{
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 	private Map<State, Double> neighbourNodes(State current) 
 	{
@@ -150,7 +150,7 @@ public class AStar implements Algorithm
 
 	private Double calculateHeuristicCost(State start, State goal) 
 	{
-		return (model.getWall().getW()- start.getLegState().get(LEG.LEFT_FOOT).getY())*2; // ZLE TYMCZASOWE
+		return (model.getWall().getW()- start.getLegState().get(LEG.LEFT_FOOT).getY())*2;
 	}
 
 	// testy
