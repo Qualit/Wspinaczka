@@ -33,6 +33,8 @@ public class Controller
     	((AStar) algorithm).printGrips2();
     	
     	Path path = algorithm.findPath(model.getWall().getStart(), model.getWall().getGoal());
+    	System.out.println("*********************************");
+    	System.out.print(model.getWallMockup(((DonePath) path).getStart()));
 
     	if (path != null)
     		path.showPath();

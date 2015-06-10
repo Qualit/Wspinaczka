@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Collections;
 
+import mockups.GripMockup;
+import mockups.WallMockup;
+
 import wspinaczka.Configuration;
 
 public class Wall
@@ -199,5 +202,79 @@ public class Wall
 	public final State getGoal() 
 	{
 		return goal;
+	}
+
+	public WallMockup getWallMochup(State currentState) 
+	{
+		double lowerBound;
+		double upperBound;
+		
+		if(currentState.getLegState().get(LEG.LEFT_FOOT).getY() <= currentState.getLegState().get(LEG.RIGHT_FOOT).getY())
+		{
+			lowerBound = currentState.getLegState().get(LEG.LEFT_FOOT).getY() - 1;
+			if(lowerBound < 0)
+			{
+				lowerBound = 0;
+			}
+			upperBound = lowerBound + Configuration.visibleWallHeight;
+			if(upperBound > w)
+			{
+				upperBound = w;
+			}
+		}
+		else
+		{
+			lowerBound = currentState.getLegState().get(LEG.RIGHT_FOOT).getY() - 1;
+			if(lowerBound < 0)
+			{
+				lowerBound = 0;
+			}
+			upperBound = lowerBound + Configuration.visibleWallHeight;
+			if(upperBound > w)
+			{
+				upperBound = w;
+			}
+		}
+		
+		List<Grip> gripsList = getGripsBetween(lowerBound, upperBound);
+		
+		Map<Integer, GripMockup> gripMockupsList = new HashMap<Integer, GripMockup>();
+		for (Grip g : gripsList)
+		{
+			gripMockupsList.put(g.getIdGrip() ,new GripMockup(g));
+		}
+		
+		Integer leftHandId = currentState.getLegState().get(LEG.LEFT_HAND).getIdGrip();
+		Integer rightHandId = currentState.getLegState().get(LEG.RIGHT_HAND).getIdGrip();
+		Integer leftFootId = currentState.getLegState().get(LEG.LEFT_FOOT).getIdGrip();
+		Integer rightFootId = currentState.getLegState().get(LEG.RIGHT_FOOT).getIdGrip();
+		
+		(gripMockupsList.get(leftHandId)).setLeg(LEG.LEFT_HAND);
+		(gripMockupsList.get(rightHandId)).setLeg(LEG.RIGHT_HAND);
+		(gripMockupsList.get(leftFootId)).setLeg(LEG.LEFT_FOOT);
+		(gripMockupsList.get(rightFootId)).setLeg(LEG.RIGHT_FOOT);
+	
+		
+		WallMockup wallMochup = new WallMockup(gripMockupsList);
+	
+		return wallMochup;
+	}
+
+	public List<Grip> getGripsBetween(double lowerBound, double upperBound) 
+	{
+		List<Grip> gripsList = new ArrayList<Grip>();
+		for (Grip g : grips)
+		{
+			if(g.getY() < lowerBound)
+			{
+				continue;
+			}
+			if(g.getY() > upperBound)
+			{
+				break;
+			}
+			gripsList.add(g);
+		}
+		return gripsList;
 	}
 }
