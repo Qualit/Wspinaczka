@@ -14,21 +14,32 @@ public class DonePath extends Path
 		super();
 		this.start = start;
 		this.goal = goal;
+		assignNextPointers();
 	}
 
 	@Override
 	public void showPath()
 	{
-		ArrayList<State> list = new ArrayList<State>();
-		State now = goal;
+		State now = start;
 
 		while (now != null)
 		{
-			list.add(now);
-			now = now.getPrevious();
+			System.out.println(now.toString());
+			now = now.getNext();
 		}
-
-		for (int i = list.size()-1; i >= 0; i--)
-			System.out.println(list.get(i));
+			
+	}
+	
+	private void assignNextPointers()
+	{
+		State current = null;
+		State nextState = goal;
+		
+		do
+		{
+			current = nextState.getPrevious();
+			current.setNext(nextState);
+			nextState = current;
+		}while(current.getPrevious() != null);
 	}
 }

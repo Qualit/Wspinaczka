@@ -14,6 +14,7 @@ public class State implements AbstractState
     private final Map<LEG, Grip> legState;
     // stan z ktorego przyszlismy do biezacego stanu
     private State previous;
+    private State next;
 
     public State(Map<LEG, Grip> legState, State previous)
     {	// TODO Auto-generated method stub
@@ -122,5 +123,13 @@ public class State implements AbstractState
 	public Grip getLegGrip(LEG activeLeg) 
 	{
 		return legState.get(activeLeg);
+	}
+
+	public final State getNext() {
+		return next;
+	}
+
+	public final void setNext(State next) {
+		this.next = next;
 	}
 }
