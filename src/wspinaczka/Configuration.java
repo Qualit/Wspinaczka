@@ -2,6 +2,9 @@ package wspinaczka;
 
 public class Configuration
 {
+	public static final double visibleWallHeight = 4;
+	
+	
 	public static final double radius = 2.0;
 	
     public static final double minX = 0.0;

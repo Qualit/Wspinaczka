@@ -42,4 +42,8 @@ public class DonePath extends Path
 			nextState = current;
 		}while(current.getPrevious() != null);
 	}
+
+	public final State getStart() {
+		return start;
+	}
 }

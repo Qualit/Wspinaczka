@@ -14,6 +14,7 @@ public class State implements AbstractState
     private final Map<LEG, Grip> legState;
     // stan z ktorego przyszlismy do biezacego stanu
     private State previous;
+    //stan nastepny do ktorego pojdzie wspinacz
     private State next;
 
     public State(Map<LEG, Grip> legState, State previous)

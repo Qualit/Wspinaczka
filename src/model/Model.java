@@ -2,6 +2,8 @@ package model;
 
 import java.util.List;
 
+import mockups.WallMockup;
+
 public class Model 
 {
 	private final Wall wall;
@@ -20,5 +22,15 @@ public class Model
 	public final Wall getWall() 
 	{
 		return wall;
+	}
+	
+	public final WallMockup getWallMockup(State currentState)
+	{
+		return wall.getWallMochup(currentState);
+	}
+	
+	public List<Grip> getGripsBetween(final double lowerBoud, final double upperBound)
+	{
+		return wall.getGripsBetween(lowerBoud, upperBound);
 	}
 }
