@@ -76,21 +76,23 @@ public class WallPanel extends JPanel
         	Integer y = convertYToCoordinate(gripMockup.getY(),lowestY);
                 Coordinate coord = new Coordinate(x, y);
                 gripColor = Color.BLUE;
-                ret.put(coord, new GripImage(x, y, ViewConfiguration.widthOfGrip, ViewConfiguration.heightOfGrip, gripColor));
+                ret.put(coord, new GripImage(x, y, ViewConfiguration.widthOfGrip, ViewConfiguration.heightOfGrip, gripColor, gripMockup.getIdGrip()));
             }
             return ret;
         }
     	
     	 private Integer convertYToCoordinate(double y, Double lowestY)
 	{
-	    // TODO Auto-generated method stub
-	    return null;
+	    Float temp = (float) ((y-lowestY)*ViewConfiguration.wallPixelFactor);
+	    Integer temp2 = Math.round(temp);
+	    temp2 = ViewConfiguration.heightWallPanel;
+	    return temp2;
 	}
 
 	private Integer convertXToCoordinate(double x)
 	{
-	    // TODO Auto-generated method stub
-	    return null;
+	    Float temp = (float) (x * ViewConfiguration.wallPixelFactor);
+	    return Math.round(temp);
 	}
 
 	public void refresh(final WallMockup wallMockup)

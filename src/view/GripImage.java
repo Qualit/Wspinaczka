@@ -12,20 +12,9 @@ import java.awt.geom.Rectangle2D;
  */
 public class GripImage
 {
-    /** FieldImage shape*/
     private final Rectangle2D rect;
-    
-    /** FieldImage color*/ 
-    private final Color fieldImageColor;
-   
-    
-    public GripImage(final Rectangle2D rect, final Color fieldcolor, boolean isSelected)
-    {
-        super();
-        this.rect = rect;
-        this.fieldImageColor = fieldcolor;
-        
-    }
+    private final Color gripImageColor;
+    private final Integer idGrip;
     
     /**
      * Class constructor specifying field image's; shape,color, selection state
@@ -34,22 +23,21 @@ public class GripImage
      * @param y
      * @param width
      * @param height
-     * @param fieldcolor
-     * @param isSelected
+     * @param gripColor
      */
     public GripImage(final double x, final double y, final double width, final double height, 
-            final Color fieldcolor )
+            final Color gripColor, final Integer idGrip )
     {
         super();
         this.rect = new Rectangle2D.Double(x,y,width,height);
-        this.fieldImageColor = fieldcolor;
-       
+        this.gripImageColor = gripColor;
+        this.idGrip = idGrip;
     }
 
     /** Gets this field's color*/
     public Color getFieldcolor()
     {
-        return fieldImageColor;
+        return gripImageColor;
     }
     
     /** Gets this field's rectangle*/

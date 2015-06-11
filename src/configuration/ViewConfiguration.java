@@ -8,6 +8,8 @@ public class ViewConfiguration
     public static final int widthWallPanel = 600;
     public static final int heightWallPanel = 800;
     
+    public static final int wallPixelFactor = 200;
+    
     
     public static final int widthOfGrip = 10;
     public static final int heightOfGrip = 4;
