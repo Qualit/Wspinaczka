@@ -13,7 +13,7 @@ import java.awt.geom.Rectangle2D;
 public class GripImage
 {
     private final Rectangle2D rect;
-    private final Color gripImageColor;
+    private final Color gripColor;
     private final Integer idGrip;
     
     /**
@@ -30,14 +30,14 @@ public class GripImage
     {
         super();
         this.rect = new Rectangle2D.Double(x,y,width,height);
-        this.gripImageColor = gripColor;
+        this.gripColor = gripColor;
         this.idGrip = idGrip;
     }
 
     /** Gets this field's color*/
-    public Color getFieldcolor()
+    public Color getGripColor()
     {
-        return gripImageColor;
+        return gripColor;
     }
     
     /** Gets this field's rectangle*/

@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,7 +25,7 @@ public class ApplicationFrame extends JFrame
 	 super("Wspinaczka");
 	 this.setSize(ViewConfiguration.widthApplicationPanel, ViewConfiguration.heightApplicationPanel);
 	 this.view = view;
-	 this.wallPanel = new WallPanel();
+	 this.wallPanel = new WallPanel(view.getStartWallMockup());
 	 wallPanel.initializePanel();
 	 this.inputPanel = new JPanel();
 	 this.statsPanel = new JPanel();
@@ -45,6 +47,17 @@ public class ApplicationFrame extends JFrame
 	wField.setToolTipText("podaj W");
 	inputPanel.add(wField);
 	inputPanel.setVisible(true);
+	
+	startButton.addActionListener(new ActionListener() {
+	    
+	    @Override
+	    public void actionPerformed(ActionEvent e)
+	    {
+		// TODO Auto-generated method stub
+		
+		
+	    }
+	});
 	
 	JButton nextButton = new JButton("NEXT");
 	naviPanel.add(nextButton);

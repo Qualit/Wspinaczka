@@ -1,22 +1,24 @@
 package view;
 
+import mockups.WallMockup;
+
 public class View
 {
     private final ApplicationFrame applicationFrame;
+    private final WallMockup startWallMockup;
     
-    public View()
+   
+    public View(WallMockup wallMockup)
     {
-	// TODO Auto-generated constructor stub
+	this.startWallMockup = wallMockup;
 	applicationFrame = new ApplicationFrame(this);
 	applicationFrame.initializeFrame();
     }
-    public void updateWall(String wall)
+   
+    public WallMockup getStartWallMockup()
     {
-	
+        return startWallMockup;
     }
-
-    public void updateSpider()
-    {
-	// TODO Krystian
-    }
+    
+    
 }

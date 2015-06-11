@@ -5,6 +5,7 @@ import java.util.List;
 
 import view.View;
 import algorithm.*;
+import mockups.WallMockup;
 import model.*;
 
 public class Controller
@@ -22,7 +23,7 @@ public class Controller
     	this.model = new Model(inputHandler.getGrips(), inputHandler.getNumberOfGrips(), inputHandler.getWallHeight());
     	
     	this.algorithm = new AStar(model);
-    	this.view = new View();
+    	this.view = new View((model.getWallMockup(model.getWall().getStart())));
     	
     }
 
@@ -42,4 +43,5 @@ public class Controller
     	if (path != null)
     		path.showPath();
     }
+    
 }

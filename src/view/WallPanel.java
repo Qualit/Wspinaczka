@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,16 +20,21 @@ public class WallPanel extends JPanel
 {
     	private final int panelHeight = ViewConfiguration.heightWallPanel;
     	private final int panelWidth = ViewConfiguration.widthWallPanel;
+    	private final  WallMockup startWallMockup;
+    	
     	private  Map<Coordinate, GripImage> gripsMap;
 	
-    	public WallPanel() 
+    	public WallPanel(final WallMockup wallMockup) 
 	{
-	    
+	    this.startWallMockup = wallMockup;
 	}
     	
     	public void initializePanel()
     	{
     	    this.setSize(panelWidth, panelHeight);
+    	    this.setVisible(true);
+    	    refresh(startWallMockup);
+    	    
     	}
     	
     	
@@ -66,9 +73,9 @@ public class WallPanel extends JPanel
             Map<Coordinate,GripImage> ret = new HashMap<Coordinate, GripImage>();
             Color gripColor;
             
-            TreeMap<Integer, GripMockup> temp = (TreeMap<Integer, GripMockup>) wallMockup.getGripMockupsMap();
+            TreeMap<Integer, GripMockup> temp = (TreeMap<Integer, GripMockup>) (wallMockup.getGripMockupsMap());
             
-            Double lowestY = temp.get(temp.firstEntry()).getY();
+            Double lowestY = (temp.get(temp.firstKey())).getY();
             
             for(GripMockup gripMockup : wallMockup.getGripMockupsMap().values())
             {
@@ -95,8 +102,10 @@ public class WallPanel extends JPanel
 	    return Math.round(temp);
 	}
 
+	
+	
 	public void refresh(final WallMockup wallMockup)
-    	 {
+    	{
     	        final WallPanel wPanel = this;
     	        SwingUtilities.invokeLater(new Runnable() {
     	            
@@ -139,6 +148,19 @@ public class WallPanel extends JPanel
     	            }
     	        }
     	        return null;
+    	    }
+    	    
+    	    @Override
+    	    public void paintComponent(Graphics g)
+    	    {
+    	        Graphics2D g2 = (Graphics2D) g;
+    	        for(GripImage gripImage: gripsMap.values())
+    	        {
+    	            g2.setColor(gripImage.getGripColor());
+    	            g2.fill(gripImage.getRect());
+    	           
+    	        }
+    	       
     	    }
 
 	    public Map<Coordinate, GripImage> getGripsMap()
