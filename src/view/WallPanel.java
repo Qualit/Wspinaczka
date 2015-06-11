@@ -27,50 +27,18 @@ public class WallPanel extends JPanel
     	public WallPanel(final WallMockup wallMockup) 
 	{
 	    this.startWallMockup = wallMockup;
-	    this.setOpaque(true);
-	    this.setBackground(Color.YELLOW);
 	}
     	
     	public void initializePanel()
     	{
     	    this.setSize(panelWidth, panelHeight);
-    	    //this.setForeground(Color.YELLOW);
+    	    this.setBackground(Color.YELLOW);
     	    
     	    this.setVisible(true);
     	    refresh(startWallMockup);
     	    
     	}
     	
-    	
-    	/*private void fillFieldsMap()
-        {
-            double x_d=0.0;
-            double y_d=0.0;
-            double fieldWidth = width/8;
-            double fieldHeight = height/8;
-            int col=0;
-            int row=0;
-            for(col=0; col<8; ++col)
-            {
-                for(row=0; row<8; ++row)
-                {
-                    x_d = row*fieldWidth;
-                    y_d = col*fieldHeight;
-                    Color color = Color.WHITE;
-                    if((col+row)%2==0)
-                    {
-                        color = brightFieldsColor;
-                    }
-                    else
-                    {
-                        color = darkFieldsColor;
-                    }
-                    FieldImage fieldImage = new FieldImage(x_d, y_d, fieldWidth, fieldHeight, color, false);
-                    Coordinate pos = new Coordinate(row,col);
-                    gripsMap.put(pos, fieldImage); 
-                }
-            }
-        }*/
     	
     	private Map<Coordinate, GripImage> generateNewGripsMap(final WallMockup wallMockup)
         {
@@ -86,7 +54,45 @@ public class WallPanel extends JPanel
         	Integer x = convertXToCoordinate(gripMockup.getX());
         	Integer y = convertYToCoordinate(gripMockup.getY(),lowestY);
                 Coordinate coord = new Coordinate(x, y);
-                gripColor = Color.BLUE;
+                if(gripMockup.getLeg() == null)
+                {
+                	gripColor = Color.BLUE;
+                }
+                else
+                {
+                
+                switch (gripMockup.getLeg())
+                {
+                case LEFT_HAND:
+                	{
+                		System.out.println("lewa noga");
+                		gripColor = Color.GREEN;
+                		break;
+                	}
+                case RIGHT_HAND:
+            		{
+            			gripColor = Color.RED;
+            			break;
+            		}
+                case LEFT_FOOT:
+            		{
+            			gripColor = Color.ORANGE;
+            			break;
+            		}
+                case RIGHT_FOOT:
+            		{
+            			gripColor = Color.PINK;
+            			break;
+            		}
+                default:
+            		{
+            			gripColor = Color.BLUE;
+            			break;
+            		}
+                }
+            	
+                }
+                
                 ret.put(coord, new GripImage(x, y, ViewConfiguration.widthOfGrip, ViewConfiguration.heightOfGrip, gripColor, gripMockup.getIdGrip()));
             }
             return ret;

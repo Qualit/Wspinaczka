@@ -23,7 +23,7 @@ public class Controller
     	this.model = new Model(inputHandler.getGrips(), inputHandler.getNumberOfGrips(), inputHandler.getWallHeight());
     	
     	this.algorithm = new AStar(model);
-    	this.view = new View((model.getWallMockup(model.getWall().getStart())));
+    	this.view = new View((model.getWallMockup(model.getWall().getGoal())));
     	
     }
 

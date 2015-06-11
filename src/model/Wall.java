@@ -256,7 +256,6 @@ public class Wall
 		(gripMockupsList.get(rightHandId)).setLeg(LEG.RIGHT_HAND);
 		(gripMockupsList.get(leftFootId)).setLeg(LEG.LEFT_FOOT);
 		(gripMockupsList.get(rightFootId)).setLeg(LEG.RIGHT_FOOT);
-	
 		
 		WallMockup wallMochup = new WallMockup(gripMockupsList);
 	
