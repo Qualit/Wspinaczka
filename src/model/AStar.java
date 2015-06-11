@@ -2,7 +2,7 @@ package model;
 
 import java.util.*;
 import algorithm.*;
-import wspinaczka.Configuration;
+import configuration.*;
 
 public class AStar implements Algorithm 
 {

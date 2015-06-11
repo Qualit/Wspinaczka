@@ -1,10 +1,12 @@
 package controller;
 
 import java.util.HashMap;
+import configuration.*;
+
 import java.util.Map;
 import java.util.Random;
 
-import wspinaczka.*;
+
 
 public class GripParamsRandomGenerator
 {

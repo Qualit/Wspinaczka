@@ -26,7 +26,7 @@ public class Model
 	
 	public final WallMockup getWallMockup(State currentState)
 	{
-		return wall.getWallMochup(currentState);
+		return wall.getWallMockup(currentState);
 	}
 	
 	public List<Grip> getGripsBetween(final double lowerBoud, final double upperBound)

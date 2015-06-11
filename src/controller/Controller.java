@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.util.List;
 
+import view.View;
 import algorithm.*;
 import model.*;
 
@@ -11,7 +12,8 @@ public class Controller
     private final Model model;					// sciana 
     private final InputHandler inputHandler;	// obsluga wejscia
     private final Algorithm algorithm;			// pole klasy implementujacej interfejs Algorithm
-
+    private final View view;
+    
     public Controller(List<String> argsList) throws IOException
     {
     	this.inputHandler = new InputHandler();
@@ -20,6 +22,7 @@ public class Controller
     	this.model = new Model(inputHandler.getGrips(), inputHandler.getNumberOfGrips(), inputHandler.getWallHeight());
     	
     	this.algorithm = new AStar(model);
+    	this.view = new View();
     	
     }
 

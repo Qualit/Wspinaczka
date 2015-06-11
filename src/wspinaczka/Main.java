@@ -10,6 +10,7 @@ public class Main
 {
     public static void main(String[] args) throws IOException
     {
+	
     	List<String> argsList = new ArrayList<String>();
     	for (String s : args)
     	{
@@ -22,7 +23,7 @@ public class Main
     				"Reading data from file:\t\tf [file name]");
 
     	final Controller controller = new Controller(argsList);
-		controller.displayLogs();
+		//controller.displayLogs();
 
 		//final Model model = new Model(args);
 

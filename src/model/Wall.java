@@ -10,7 +10,8 @@ import java.util.Collections;
 import mockups.GripMockup;
 import mockups.WallMockup;
 
-import wspinaczka.Configuration;
+import configuration.*;
+
 
 public class Wall
 {
@@ -204,7 +205,7 @@ public class Wall
 		return goal;
 	}
 
-	public WallMockup getWallMochup(State currentState) 
+	public WallMockup getWallMockup(State currentState) 
 	{
 		double lowerBound;
 		double upperBound;
