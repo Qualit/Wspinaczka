@@ -34,5 +34,33 @@ public class GripMockup
 			sb.append("idGrip=" + idGrip + " x=" + x + " y=" + y + " cost=" + cost + " leg=" + leg + "\n");
 		return sb.toString();
 	}
+
+	public int getIdGrip()
+	{
+	    return idGrip;
+	}
+
+	public double getX()
+	{
+	    return x;
+	}
+
+	public double getY()
+	{
+	    return y;
+	}
+
+	public double getCost()
+	{
+	    return cost;
+	}
+
+	public LEG getLeg()
+	{
+	    return leg;
+	}
+	
+	
+	
 	
 }

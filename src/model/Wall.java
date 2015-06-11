@@ -6,10 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Collections;
+import java.util.TreeMap;
 
 import mockups.GripMockup;
 import mockups.WallMockup;
-
 import configuration.*;
 
 
@@ -241,10 +241,10 @@ public class Wall
 		
 		List<Grip> gripsList = getGripsBetween(lowerBound, upperBound);
 		
-		Map<Integer, GripMockup> gripMockupsList = new HashMap<Integer, GripMockup>();
+		Map<Integer, GripMockup> gripMockupsList = new TreeMap<Integer, GripMockup>();
 		for (Grip g : gripsList)
 		{
-			gripMockupsList.put(g.getIdGrip() ,new GripMockup(g));
+			gripMockupsList.put(g.getIdGrip(), new GripMockup(g));
 		}
 		
 		Integer leftHandId = currentState.getLegState().get(LEG.LEFT_HAND).getIdGrip();

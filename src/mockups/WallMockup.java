@@ -4,11 +4,11 @@ import java.util.Map;
 
 public class WallMockup 
 {
-	private final Map<Integer, GripMockup> gripMockupsList;
+	private final Map<Integer, GripMockup> gripMockupsMap;
 
-	public WallMockup(final Map<Integer, GripMockup> gripMockupsList)
+	public WallMockup(final Map<Integer, GripMockup> gripMockupsMap)
 	{
-		this.gripMockupsList = gripMockupsList;
+		this.gripMockupsMap = gripMockupsMap;
 	}
 	
 	@Override
@@ -16,10 +16,17 @@ public class WallMockup
 	{
 		StringBuilder sb = new StringBuilder();
 		
-		for (int i=0 ; i < gripMockupsList.size() ; i++)
+		for (int i=0 ; i < gripMockupsMap.size() ; i++)
 		{
-			sb.append(gripMockupsList.get(i).toString());
+			sb.append(gripMockupsMap.get(i).toString());
 		}
 		return sb.toString();
 	}
+
+	public Map<Integer, GripMockup> getGripMockupsMap()
+	{
+	    return gripMockupsMap;
+	}
+	
+	
 }
