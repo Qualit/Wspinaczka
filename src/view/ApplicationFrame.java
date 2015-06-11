@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -27,6 +28,7 @@ public class ApplicationFrame extends JFrame
 	 this.view = view;
 	 this.wallPanel = new WallPanel(view.getStartWallMockup());
 	 wallPanel.initializePanel();
+	 wallPanel.setBackground(Color.YELLOW);
 	 this.inputPanel = new JPanel();
 	 this.statsPanel = new JPanel();
 	 this.naviPanel = new JPanel();

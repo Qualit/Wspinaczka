@@ -27,11 +27,15 @@ public class WallPanel extends JPanel
     	public WallPanel(final WallMockup wallMockup) 
 	{
 	    this.startWallMockup = wallMockup;
+	    this.setOpaque(true);
+	    this.setBackground(Color.YELLOW);
 	}
     	
     	public void initializePanel()
     	{
     	    this.setSize(panelWidth, panelHeight);
+    	    //this.setForeground(Color.YELLOW);
+    	    
     	    this.setVisible(true);
     	    refresh(startWallMockup);
     	    
@@ -91,8 +95,8 @@ public class WallPanel extends JPanel
     	 private Integer convertYToCoordinate(double y, Double lowestY)
 	{
 	    Float temp = (float) ((y-lowestY)*ViewConfiguration.wallPixelFactor);
-	    Integer temp2 = Math.round(temp);
-	    temp2 = ViewConfiguration.heightWallPanel;
+	    Integer temp2 = ViewConfiguration.heightWallPanel - Math.round(temp);
+	   // temp2 = ViewConfiguration.heightWallPanel;
 	    return temp2;
 	}
 
