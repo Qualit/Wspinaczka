@@ -220,6 +220,7 @@ public class Wall
 			if(upperBound > w)
 			{
 				upperBound = w;
+				lowerBound = upperBound - Configuration.visibleWallHeight;
 			}
 		}
 		else
@@ -233,6 +234,7 @@ public class Wall
 			if(upperBound > w)
 			{
 				upperBound = w;
+				lowerBound = upperBound - Configuration.visibleWallHeight;
 			}
 		}
 		
