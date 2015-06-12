@@ -5,9 +5,9 @@ import java.util.TreeMap;
 
 public class WallMockup 
 {
-	private final Map<Integer, GripMockup> gripMockupsMap;
-	private final double currentCost;
-	private final int numberOfState;
+	private Map<Integer, GripMockup> gripMockupsMap;
+	private double currentCost;
+	private int numberOfState;
 
 	public WallMockup()
 	{
@@ -37,6 +37,21 @@ public class WallMockup
 	public Map<Integer, GripMockup> getGripMockupsMap()
 	{
 	    return gripMockupsMap;
+	}
+	public final double getCurrentCost() {
+		return currentCost;
+	}
+	public final int getNumberOfState() {
+		return numberOfState;
+	}
+	public final void setGripMockupsMap(Map<Integer, GripMockup> gripMockupsMap) {
+		this.gripMockupsMap = gripMockupsMap;
+	}
+	public final void setCurrentCost(double currentCost) {
+		this.currentCost = currentCost;
+	}
+	public final void setNumberOfState(int numberOfState) {
+		this.numberOfState = numberOfState;
 	}
 	
 	

@@ -90,5 +90,20 @@ public class View
 	{
 		this.wallMockup = wallMockup;
 	}
+
+	public void displayStats() 
+	{
+		SwingUtilities.invokeLater(new Runnable() {
+		    
+		    @Override
+		    public void run()
+		    {
+			// TODO Auto-generated method stub
+			applicationFrame.displayStats(wallMockup.getCurrentCost(), wallMockup.getNumberOfState());
+			
+		    }
+		});
+		
+	}
     
 }

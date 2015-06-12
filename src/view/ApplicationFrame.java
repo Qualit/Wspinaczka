@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -38,7 +39,8 @@ public class ApplicationFrame extends JFrame
     private JTextField nField;
     private JTextField wField;
     private JTextArea deepField;
-    private JTextField costField;
+    private JTextArea costField;
+    private JTextArea gripField;
     
     
     private JPanel naviPanel;
@@ -82,13 +84,17 @@ public class ApplicationFrame extends JFrame
     	JButton prevButton = new JButton("PREV");
     	naviPanel.add(prevButton);
 	
-    	costField = new JTextField(10);
+    	costField = new JTextArea(10,1);
     	costField.setToolTipText("Koszt sciezki");
     	naviPanel.add(costField);
 	
     	deepField = new JTextArea(10,1);
     	deepField.setToolTipText("Glebokosc");
     	naviPanel.add(deepField);
+    	
+    	gripField = new JTextArea(10,1);
+    	gripField.setToolTipText("Uchwyt");
+    	naviPanel.add(gripField);
 
     	this.add(inputPanel, BorderLayout.WEST);
     	
@@ -133,6 +139,7 @@ public class ApplicationFrame extends JFrame
     		    try
 		    {
 			view.initializeWall(argsList);
+			view.displayStats();
 		    } catch (IOException e1)
 		    {
 			// TODO Auto-generated catch block
@@ -152,6 +159,7 @@ public class ApplicationFrame extends JFrame
 				{
 					wallPanel.clear();
 					view.setCurrentState(next);
+					view.displayStats();
 					view.refreshView();
 				}
 			}
@@ -165,6 +173,7 @@ public class ApplicationFrame extends JFrame
 				if(prev != null)
 				{
 					view.setCurrentState(prev);
+					view.displayStats();
 					view.refreshView();
 				}
 			}
@@ -185,7 +194,7 @@ public class ApplicationFrame extends JFrame
     
     public void displayParams(String params)
     {
-	deepField.setText(params);
+    	gripField.setText(params);
     }
     
     class WallPanelListener extends MouseAdapter
@@ -225,6 +234,15 @@ public class ApplicationFrame extends JFrame
 	public void updateWallPanel(WallMockup wallMockup) 
 	{
 		wallPanel.refresh(wallMockup);
+		
+	}
+
+
+	public void displayStats(double currentCost, int numberOfState) 
+	{
+		DecimalFormat df = new DecimalFormat("#.####");
+		costField.setText("Koszt dojścia:\n" + df.format(currentCost));
+		deepField.setText("Numer stanu:\n" + numberOfState);
 		
 	}
 }

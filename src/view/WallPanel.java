@@ -131,7 +131,7 @@ public class WallPanel extends JPanel
     		ret.put(coord, new GripImage(x, y, widthOfGrip, ViewConfiguration.heightOfGrip, gripColor, gripMockup.getIdGrip()));
     	}
     	if(tempLegs.size()==4)
-    	{
+    	{ 		
         	double dx1 = tempLegs.get(LEG.LEFT_HAND).getX();
         	double dy1 = tempLegs.get(LEG.LEFT_HAND).getY();
         	Integer ix1 = convertXToCoordinate(dx1);
@@ -158,7 +158,75 @@ public class WallPanel extends JPanel
         	legImageList.add(new LegImage(p3,p4));
         	System.out.println("tworze legimage");
     	}
+    	if(tempLegs.size()==2)
+    	{
+    		tempLegs.put(LEG.LEFT_HAND, tempLegs.get(LEG.RIGHT_HAND));
+    		tempLegs.put(LEG.LEFT_FOOT, tempLegs.get(LEG.RIGHT_FOOT));
+    		
+        	double dx1 = tempLegs.get(LEG.LEFT_HAND).getX();
+        	double dy1 = tempLegs.get(LEG.LEFT_HAND).getY();
+        	Integer ix1 = convertXToCoordinate(dx1);
+        	Integer iy1 = convertYToCoordinate(dy1, lowestY);
+        	Coordinate p1 = new Coordinate(ix1,iy1);
+        	double dx2 = tempLegs.get(LEG.RIGHT_FOOT).getX();
+        	double dy2 = tempLegs.get(LEG.RIGHT_FOOT).getY();
+        	Integer ix2 = convertXToCoordinate(dx2);
+        	Integer iy2 = convertYToCoordinate(dy2, lowestY);
+        	Coordinate p2 = new Coordinate(ix2, iy2);
+        	legImageList.add(new LegImage(p1,p2));
+        	System.out.println("tworze legimage");
+        	
+        	double dx3 = tempLegs.get(LEG.RIGHT_HAND).getX();
+        	double dy3 = tempLegs.get(LEG.RIGHT_HAND).getY();
+        	Integer ix3 = convertXToCoordinate(dx3);
+        	Integer iy3 = convertYToCoordinate(dy3, lowestY);
+        	Coordinate p3 = new Coordinate(ix3,iy3);
+        	double dx4 = tempLegs.get(LEG.LEFT_FOOT).getX();
+        	double dy4 = tempLegs.get(LEG.LEFT_FOOT).getY();
+        	Integer ix4 = convertXToCoordinate(dx4);
+        	Integer iy4 = convertYToCoordinate(dy4, lowestY);
+        	Coordinate p4 = new Coordinate(ix4, iy4);
+        	legImageList.add(new LegImage(p3,p4));
+        	System.out.println("tworze legimage");
+    	}
+    	if(tempLegs.size()==3)
+    	{
+    		if(tempLegs.containsKey(LEG.LEFT_HAND))
+    		{
+    			tempLegs.put(LEG.LEFT_FOOT, tempLegs.get(LEG.RIGHT_FOOT));
+    		}
+    		else
+    		{
+        		tempLegs.put(LEG.LEFT_HAND, tempLegs.get(LEG.RIGHT_HAND));
+    		}
 
+        	double dx1 = tempLegs.get(LEG.LEFT_HAND).getX();
+        	double dy1 = tempLegs.get(LEG.LEFT_HAND).getY();
+        	Integer ix1 = convertXToCoordinate(dx1);
+        	Integer iy1 = convertYToCoordinate(dy1, lowestY);
+        	Coordinate p1 = new Coordinate(ix1,iy1);
+        	double dx2 = tempLegs.get(LEG.RIGHT_FOOT).getX();
+        	double dy2 = tempLegs.get(LEG.RIGHT_FOOT).getY();
+        	Integer ix2 = convertXToCoordinate(dx2);
+        	Integer iy2 = convertYToCoordinate(dy2, lowestY);
+        	Coordinate p2 = new Coordinate(ix2, iy2);
+        	legImageList.add(new LegImage(p1,p2));
+        	System.out.println("tworze legimage");
+        	
+        	double dx3 = tempLegs.get(LEG.RIGHT_HAND).getX();
+        	double dy3 = tempLegs.get(LEG.RIGHT_HAND).getY();
+        	Integer ix3 = convertXToCoordinate(dx3);
+        	Integer iy3 = convertYToCoordinate(dy3, lowestY);
+        	Coordinate p3 = new Coordinate(ix3,iy3);
+        	double dx4 = tempLegs.get(LEG.LEFT_FOOT).getX();
+        	double dy4 = tempLegs.get(LEG.LEFT_FOOT).getY();
+        	Integer ix4 = convertXToCoordinate(dx4);
+        	Integer iy4 = convertYToCoordinate(dy4, lowestY);
+        	Coordinate p4 = new Coordinate(ix4, iy4);
+        	legImageList.add(new LegImage(p3,p4));
+        	System.out.println("tworze legimage");
+    	}
+    	
     	return ret;
     }
     	
