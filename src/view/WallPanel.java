@@ -17,7 +17,12 @@ import configuration.ViewConfiguration;
 
 public class WallPanel extends JPanel
 {
-    private final int panelHeight = ViewConfiguration.heightWallPanel;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private final int panelHeight = ViewConfiguration.heightWallPanel;
     private final int panelWidth = ViewConfiguration.widthWallPanel;
     private final  WallMockup startWallMockup;
     private  Map<Coordinate, GripImage> gripsMap;
@@ -128,13 +133,13 @@ public class WallPanel extends JPanel
     }
 	
     	/** Gets the field image using point */
- 	public GripImage getFieldImage(final Point2D point)
+ 	public GripImage getGripImage(final Point2D point)
 	{
- 		for(GripImage fieldImage: gripsMap.values())
+ 		for(GripImage gripImage: gripsMap.values())
     	{
-    		if(fieldImage.getRect().contains(point))
+    		if(gripImage.getRect().contains(point))
     		{
-    			return fieldImage;
+    			return gripImage;
     	   	}
     	}
  		return null;
@@ -143,7 +148,7 @@ public class WallPanel extends JPanel
 	/** Gets field coordinates of provided point*/
 	public Coordinate getCoordinates(final Point2D point)
 	{
-		GripImage found = getFieldImage(point);
+		GripImage found = getGripImage(point);
 		if(found!=null)
     	{
 			for(Coordinate coord : gripsMap.keySet())

@@ -1,7 +1,5 @@
 package model;
 
-import java.util.ArrayList;
-
 import algorithm.Path;
 
 public class DonePath extends Path 
