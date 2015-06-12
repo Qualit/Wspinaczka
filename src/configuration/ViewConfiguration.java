@@ -10,8 +10,8 @@ public class ViewConfiguration
     
     public static final int wallPixelFactor = 200;
     
-    
-    public static final int widthOfGrip = 20;
+    public static final int maxWidthOfGrip = 30;
+    public static final int minWidthOfGrip = 10;
     public static final int heightOfGrip = 5;
     
     
