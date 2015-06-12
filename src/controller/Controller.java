@@ -60,8 +60,8 @@ public class Controller
     
     public void replaceWall(List<String> argsList) throws IOException
     {
-	inputHandler.prepareParameters(argsList);
-	model.setWall(new Wall(inputHandler.getGrips(), inputHandler.getNumberOfGrips(), inputHandler.getWallHeight()));
+    	inputHandler.prepareParameters(argsList);
+    	model.setWall(new Wall(inputHandler.getGrips(), inputHandler.getNumberOfGrips(), inputHandler.getWallHeight()));
     }
 
 	public WallMockup getNewWallMockup(State state) 

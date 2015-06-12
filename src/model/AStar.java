@@ -11,8 +11,6 @@ public class AStar implements Algorithm
     	private final Set<State> closedSet; // zbior stanow zamknietych
     	private final Map<State, Double> gScore; // waga aktualnie najtanszej sciezki
     	private final Map<State, Double> fScore; // gScore + heuristic
-//    	private final State start; // stan poczatkowy
-//    	private final State goal; // stan koncowy
     	private State current;
 
 	public AStar(Model model) 
@@ -22,8 +20,6 @@ public class AStar implements Algorithm
 	    this.closedSet = new HashSet<State>();
 	    this.gScore = new HashMap<State, Double>();
 	    this.fScore = new HashMap<State, Double>();
-//	    this.start = model.getWall().getStart();
-//	    this.goal = model.getWall().getGoal();
 	    this.current = null;	// UWAGA
 	}
 
@@ -44,8 +40,9 @@ public class AStar implements Algorithm
 	    	
 	    	if (current.equals(goal))
 	    	{
-	    		return new DonePath((State) start, (State) current);
-	    		//return new Path; 	// do zrobienia
+	    		DonePath path = new DonePath((State) start, (State) current);
+	    		path.setCosts(gScore);
+	    		return path;
 	    	}
 	    	
 	    	openSet.remove(current);
@@ -54,7 +51,7 @@ public class AStar implements Algorithm
 	    	
 	    	Map<State, Double> neighbourNodesAndCosts = new HashMap<State, Double>();
 	    	neighbourNodesAndCosts = neighbourNodes(current);
-	    	
+	    	System.out.println("Ilosc sasiadow: " + neighbourNodesAndCosts.size());
 	    	for (State neighbour : neighbourNodesAndCosts.keySet())
 	    	{
 	    		//System.out.println(neightbour.toString());
@@ -88,12 +85,6 @@ public class AStar implements Algorithm
 	    	
 		return null;
 	}
-
-//	private Double costBetween(State currentState, State neightbour) 
-//	{
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 
 	private Map<State, Double> neighbourNodes(State current) 
 	{
@@ -137,7 +128,6 @@ public class AStar implements Algorithm
 		for (Grip g : feasibleGrips)
 		{
 			Map<LEG, Grip> newLegState = new HashMap<LEG, Grip>();
-//			newLegState.putAll(currentState.getLegState());
 			newLegState.put(LEG.LEFT_HAND, currentState.getLegGrip(LEG.LEFT_HAND));
 			newLegState.put(LEG.RIGHT_HAND, currentState.getLegGrip(LEG.RIGHT_HAND));
 			newLegState.put(LEG.LEFT_FOOT, currentState.getLegGrip(LEG.LEFT_FOOT));
@@ -150,7 +140,13 @@ public class AStar implements Algorithm
 
 	private Double calculateHeuristicCost(State start, State goal) 
 	{
-		return (model.getWall().getW()- start.getLegState().get(LEG.LEFT_FOOT).getY())*2;
+		//return (model.getWall().getW()- start.getLegState().get(LEG.LEFT_FOOT).getY())*2;
+		Double lh = (goal.getLegGrip(LEG.LEFT_HAND).distance(start.getLegGrip(LEG.LEFT_HAND))) /2;
+		Double rh = (goal.getLegGrip(LEG.RIGHT_HAND).distance(start.getLegGrip(LEG.RIGHT_HAND))) /2;
+		Double lf = (goal.getLegGrip(LEG.LEFT_FOOT).distance(start.getLegGrip(LEG.LEFT_FOOT))) /2;
+		Double rf = (goal.getLegGrip(LEG.RIGHT_FOOT).distance(start.getLegGrip(LEG.RIGHT_FOOT))) /2;
+		
+		return lh+rh+lf+rf;
 	}
 
 	// testy

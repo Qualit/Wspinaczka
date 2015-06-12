@@ -17,12 +17,18 @@ public class State implements AbstractState
     private State previous;
     //stan nastepny do ktorego pojdzie wspinacz
     private State next;
+    
+    private double ownCost;
+    private int numberOfState;
 
     public State(Map<LEG, Grip> legState, State previous)
     {	// TODO Auto-generated method stub
 	    super();
 	    this.legState = legState;
 	    this.previous = previous;
+	    this.next = null;
+	    this.ownCost = 0;
+	    this.numberOfState = 0;
     }
     
     public State()
@@ -141,5 +147,21 @@ public class State implements AbstractState
 	public final void setNext(State next) 
 	{
 		this.next = next;
+	}
+
+	public final double getOwnCost() {
+		return ownCost;
+	}
+
+	public final int getNumberOfState() {
+		return numberOfState;
+	}
+
+	public final void setOwnCost(double ownCost) {
+		this.ownCost = ownCost;
+	}
+
+	public final void setNumberOfState(int numberOfState) {
+		this.numberOfState = numberOfState;
 	}
 }

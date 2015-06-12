@@ -25,27 +25,27 @@ public class Grip
 		{
 			case LEFT_HAND:
 			{
-				return isRealyFeasible(current.getLegGrip(LEG.RIGHT_HAND)) & 
-					   isRealyFeasible(current.getLegGrip(LEG.LEFT_FOOT)) & 
-					   isRealyFeasible(current.getLegGrip(LEG.RIGHT_FOOT));
+				return isInReach(current.getLegGrip(LEG.RIGHT_HAND)) & 
+					   isInReach(current.getLegGrip(LEG.LEFT_FOOT)) & 
+					   isInReach(current.getLegGrip(LEG.RIGHT_FOOT));
 			}
 			case RIGHT_HAND:
 			{
-				return isRealyFeasible(current.getLegGrip(LEG.LEFT_HAND)) & 
-					   isRealyFeasible(current.getLegGrip(LEG.LEFT_FOOT)) & 
-					   isRealyFeasible(current.getLegGrip(LEG.RIGHT_FOOT));
+				return isInReach(current.getLegGrip(LEG.LEFT_HAND)) & 
+					   isInReach(current.getLegGrip(LEG.LEFT_FOOT)) & 
+					   isInReach(current.getLegGrip(LEG.RIGHT_FOOT));
 			}
 			case LEFT_FOOT:
 			{
-				return isRealyFeasible(current.getLegGrip(LEG.RIGHT_HAND)) & 
-					   isRealyFeasible(current.getLegGrip(LEG.LEFT_HAND)) & 
-					   isRealyFeasible(current.getLegGrip(LEG.RIGHT_FOOT));
+				return isInReach(current.getLegGrip(LEG.RIGHT_HAND)) & 
+					   isInReach(current.getLegGrip(LEG.LEFT_HAND)) & 
+					   isInReach(current.getLegGrip(LEG.RIGHT_FOOT));
 			}
 			case RIGHT_FOOT:
 			{
-				return isRealyFeasible(current.getLegGrip(LEG.RIGHT_HAND)) & 
-					   isRealyFeasible(current.getLegGrip(LEG.LEFT_FOOT)) & 
-					   isRealyFeasible(current.getLegGrip(LEG.LEFT_HAND));
+				return isInReach(current.getLegGrip(LEG.RIGHT_HAND)) & 
+					   isInReach(current.getLegGrip(LEG.LEFT_FOOT)) & 
+					   isInReach(current.getLegGrip(LEG.LEFT_HAND));
 			}
 			default:
 			{
@@ -54,9 +54,14 @@ public class Grip
 		}
 	}
 	
-	public boolean isRealyFeasible(Grip legGrip) 
+	public boolean isInReach(Grip legGrip) 
 	{
-		return (Math.sqrt(Math.pow(x-legGrip.getX(), 2) + Math.pow(y-legGrip.getY(), 2))) <= Configuration.radius;
+		return distance(legGrip) <= Configuration.radius;
+	}
+	
+	public double distance(Grip grip)
+	{
+		return (Math.sqrt(Math.pow(x-grip.getX(), 2) + Math.pow(y-grip.getY(), 2)));
 	}
 
 	@Override
