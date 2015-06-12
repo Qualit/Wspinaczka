@@ -1,5 +1,7 @@
 package mockups;
 
+import java.text.DecimalFormat;
+
 import model.Grip;
 import model.LEG;
 
@@ -30,8 +32,8 @@ public class GripMockup
 	public String toString() 
 	{
 		StringBuilder sb = new StringBuilder();
-		
-			sb.append("idGrip=" + idGrip + "\n"+ " x=" + x+ "\n" + " y=" + y+ "\n" + " cost=" + cost+ "\n" + " leg=" + leg + "\n");
+		DecimalFormat df = new DecimalFormat("#.####");
+			sb.append("idGrip=" + idGrip + "\n"+ " x=" + df.format(x) + "\n" + " y=" + df.format(y)+ "\n" + " cost=" + df.format(cost)+ "\n" + " leg=" + leg + "\n");
 		return sb.toString();
 	}
 
