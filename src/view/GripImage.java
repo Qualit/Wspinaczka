@@ -40,5 +40,12 @@ public class GripImage
     public Rectangle2D getRect()
     {
         return rect;
+    }
+
+    public Integer getIdGrip()
+    {
+        return idGrip;
     }   
+    
+    
 }

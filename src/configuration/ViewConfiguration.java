@@ -2,7 +2,7 @@ package configuration;
 
 public class ViewConfiguration
 {
-    public static final int widthApplicationPanel = 1000;
+    public static final int widthApplicationPanel = 1200;
     public static final int heightApplicationPanel = 900;
     
     public static final int widthWallPanel = 600;

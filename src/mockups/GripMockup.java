@@ -31,7 +31,7 @@ public class GripMockup
 	{
 		StringBuilder sb = new StringBuilder();
 		
-			sb.append("idGrip=" + idGrip + " x=" + x + " y=" + y + " cost=" + cost + " leg=" + leg + "\n");
+			sb.append("idGrip=" + idGrip + "\n"+ " x=" + x+ "\n" + " y=" + y+ "\n" + " cost=" + cost+ "\n" + " leg=" + leg + "\n");
 		return sb.toString();
 	}
 

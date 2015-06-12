@@ -10,6 +10,7 @@ import java.util.TreeMap;
 
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.plaf.basic.BasicLookAndFeel;
 
 import mockups.*;
 import configuration.Configuration;
@@ -182,4 +183,13 @@ public class WallPanel extends JPanel
 	{
 		this.gripsMap = gripsMap;
 	} 
+	
+//	@Override
+//	protected void paintBorder(Graphics g) 
+//	{
+//	    Graphics2D g2 = (Graphics2D) g;
+//	    g2.setColor(Color.BLACK);
+//	    g2.draw(this.getBounds());
+//	    System.out.println(this.getBounds().getMinX()+" "+this.getBounds().getMinY());
+//	}
 }
