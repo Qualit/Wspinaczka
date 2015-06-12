@@ -51,11 +51,9 @@ public class AStar implements Algorithm
 	    	
 	    	Map<State, Double> neighbourNodesAndCosts = new HashMap<State, Double>();
 	    	neighbourNodesAndCosts = neighbourNodes(current);
-	    	System.out.println("Ilosc sasiadow: " + neighbourNodesAndCosts.size());
+	
 	    	for (State neighbour : neighbourNodesAndCosts.keySet())
 	    	{
-	    		//System.out.println(neightbour.toString());
-	    		
 	    		if(closedSet.contains(neighbour))
 	    		{
 	    			continue;
@@ -79,7 +77,6 @@ public class AStar implements Algorithm
 		    			fScore.put(neighbour, gScore.get(neighbour) + calculateHeuristicCost(neighbour, (State)goal));
 	    			}
 	    		}
-	    		
 	    	}
 	    }
 	    	
@@ -145,6 +142,14 @@ public class AStar implements Algorithm
 		Double rh = (goal.getLegGrip(LEG.RIGHT_HAND).distance(start.getLegGrip(LEG.RIGHT_HAND))) /2;
 		Double lf = (goal.getLegGrip(LEG.LEFT_FOOT).distance(start.getLegGrip(LEG.LEFT_FOOT))) /2;
 		Double rf = (goal.getLegGrip(LEG.RIGHT_FOOT).distance(start.getLegGrip(LEG.RIGHT_FOOT))) /2;
+		if(lh < 1)
+			lh = 1.0;
+		if(rh < 1)
+			rh = 1.0;
+		if(lf < 1)
+			lf = 1.0;
+		if(rf < 1)
+			rf = 1.0;
 		
 		return lh+rh+lf+rf;
 	}
