@@ -5,7 +5,6 @@ import java.util.List;
 
 import view.View;
 import algorithm.*;
-import mockups.WallMockup;
 import model.*;
 
 public class Controller

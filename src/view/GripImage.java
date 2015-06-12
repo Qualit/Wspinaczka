@@ -3,12 +3,9 @@ package view;
 import java.awt.Color;
 import java.awt.geom.Rectangle2D;
 
-
 /**
  * Class representing image of a single field on the board
- * 
  * @author mk
- *
  */
 public class GripImage
 {
@@ -18,7 +15,6 @@ public class GripImage
     
     /**
      * Class constructor specifying field image's; shape,color, selection state
-     * 
      * @param x          
      * @param y
      * @param width
@@ -44,9 +40,5 @@ public class GripImage
     public Rectangle2D getRect()
     {
         return rect;
-    }
-
-    
+    }   
 }
-
-
