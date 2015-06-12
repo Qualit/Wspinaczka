@@ -133,11 +133,13 @@ public class State implements AbstractState
 		return legState.get(activeLeg);
 	}
 
-	public final State getNext() {
+	public final State getNext() 
+	{
 		return next;
 	}
 
-	public final void setNext(State next) {
+	public final void setNext(State next) 
+	{
 		this.next = next;
 	}
 }

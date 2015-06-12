@@ -19,6 +19,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import mockups.WallMockup;
+import model.State;
+
 
 
 
@@ -109,29 +112,29 @@ public class ApplicationFrame extends JFrame
     		    String n = nField.getText();
     		    if(NumericChecker.isNumericInteger(n))
     		    {
-    			argsList.add(n);
+    		    	argsList.add(n);
     		    }
     		    else
     		    {
-    			return;
+    		    	return;
     		    }
-    		    String w = wField.getText();
+    		    	String w = wField.getText();
     		    if(NumericChecker.isNumericDouble(w))
     		    {
-    			argsList.add(w);
+    		    	argsList.add(w);
     		    }
     		    else
     		    {
-    			return;
+    		    	return;
     		    }
     		    if(argsList.size()!=3)
     		    {
-    			return;
+    		    	return;
     		    }
     		    
     		    for(String s : argsList)
     		    {
-    			System.out.println(s);
+    		    	System.out.println(s);
     		    }
     		    try
 		    {
@@ -145,6 +148,32 @@ public class ApplicationFrame extends JFrame
     			
     		}
     	});
+    	
+    	nextButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				final State next = view.getCurrentState().getNext();
+				if(next != null)
+				{
+					view.setCurrentState(next);
+					view.refreshView();
+				}
+			}
+		});
+    	
+    	prevButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				final State prev = view.getCurrentState().getPrevious();
+				if(prev != null)
+				{
+					view.setCurrentState(prev);
+					view.refreshView();
+				}
+			}
+		});
 	
     	
     }
@@ -197,4 +226,12 @@ public class ApplicationFrame extends JFrame
             });
         }
     }
+
+	public void updateWallPanel(WallMockup wallMockup) 
+	{
+		wallPanel.refresh(wallMockup);
+		
+	}
+    
+
 }

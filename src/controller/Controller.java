@@ -25,7 +25,6 @@ public class Controller
     	this.algorithm = new AStar(model);
     	//this.view = new View((model.getWallMockup(model.getWall().getStart())));
     	this.view = new View(new WallMockup());
-    	
     }
     
     public void initializeView()
@@ -48,6 +47,10 @@ public class Controller
 
     	if (path != null)
     		path.showPath();
+    	
+    	
+    	view.setCurrentState(((DonePath) path).getStart());
+    	view.refreshView();
     }
 
     public Model getModel()
@@ -61,9 +64,9 @@ public class Controller
 	model.setWall(new Wall(inputHandler.getGrips(), inputHandler.getNumberOfGrips(), inputHandler.getWallHeight()));
     }
 
-  
-    
-    
-    
-    
+	public WallMockup getNewWallMockup(State state) 
+	{
+		return model.getWallMockup(state);
+		
+	}
 }

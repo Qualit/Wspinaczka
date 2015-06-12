@@ -178,16 +178,6 @@ public class Wall
 	{
 		return current.getLegGrip(activeLeg).getIdGrip()+1;
 	}
-//	
-//	private int lastFeasibleGrip(State current, LEG activeLeg, double radius) 
-//	{
-//
-//	}
-
-//	private int gripLessThen2MetersAway(double currentLegY, Grip lowestGrip, Grip highestGrip, double radius) 
-//	{
-//
-//	}
 
 	public final int getN() 
 	{

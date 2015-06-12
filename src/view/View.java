@@ -6,19 +6,21 @@ import java.util.List;
 import javax.swing.SwingUtilities;
 
 import mockups.WallMockup;
+import model.State;
 import controller.*;
 public class View
 {
     private final ApplicationFrame applicationFrame;
-    private final WallMockup wallMockup;
+    private WallMockup wallMockup;
     private Controller controller;
+    private State currentState;
     
    
     public View(WallMockup wallMockup)
     {
-	this.wallMockup = wallMockup;
-	applicationFrame = new ApplicationFrame(this);
-	applicationFrame.initializeFrame();
+    	this.wallMockup = wallMockup;
+    	applicationFrame = new ApplicationFrame(this);
+    	applicationFrame.initializeFrame();
     }
    
     public WallMockup getStartWallMockup()
@@ -62,10 +64,31 @@ public class View
     {
         this.controller = controller;
     }
-    
-    
-    
-    
-    
+
+	public final State getCurrentState() 
+	{
+		return currentState;
+	}
+
+	public final void setCurrentState(State currentState) 
+	{
+		this.currentState = currentState;
+	}
+
+	public void refreshView()
+	{
+		setWallMockup(controller.getNewWallMockup(currentState));
+		applicationFrame.updateWallPanel(getWallMockup());
+	}
+
+	public final WallMockup getWallMockup() 
+	{
+		return wallMockup;
+	}
+
+	public final void setWallMockup(WallMockup wallMockup) 
+	{
+		this.wallMockup = wallMockup;
+	}
     
 }
