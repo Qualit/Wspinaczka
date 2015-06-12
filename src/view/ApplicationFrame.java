@@ -15,6 +15,7 @@ import java.util.concurrent.Executors;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -22,7 +23,6 @@ import javax.swing.JTextField;
 
 import mockups.WallMockup;
 import model.State;
-
 import utils.NumericChecker;
 import configuration.ViewConfiguration;
 
@@ -41,6 +41,10 @@ public class ApplicationFrame extends JFrame
     private JTextArea deepField;
     private JTextArea costField;
     private JTextArea gripField;
+    private JButton openBtn;
+    private JFileChooser filechoser;
+    private String filePath="";
+    
     
     
     private JPanel naviPanel;
@@ -76,7 +80,10 @@ public class ApplicationFrame extends JFrame
     	wField = new JTextField(10);
     	wField.setToolTipText("podaj W");
     	inputPanel.add(wField);
+    	openBtn = new JButton("Open File");
+    	inputPanel.add(openBtn);
     	inputPanel.setVisible(true);
+    	
     	JButton nextButton = new JButton("NEXT");
     	naviPanel.setLayout(new BoxLayout(naviPanel, BoxLayout.PAGE_AXIS));
     	naviPanel.add(nextButton);
@@ -108,43 +115,66 @@ public class ApplicationFrame extends JFrame
     		{
     			// TODO Auto-generated method stub
     		    List<String> argsList = new ArrayList<String>();
-    		    argsList.add("r");
-    		    String n = nField.getText();
-    		    if(NumericChecker.isNumericInteger(n))
+    		    if(filePath.isEmpty())
     		    {
-    		    	argsList.add(n);
+        		    argsList.add("r");
+            		    String n = nField.getText();
+            		    if(NumericChecker.isNumericInteger(n))
+            		    {
+            		    	argsList.add(n);
+            		    }
+            		    else
+            		    {
+            		    	return;
+            		    }
+            		    	String w = wField.getText();
+            		    if(NumericChecker.isNumericDouble(w))
+            		    {
+            		    	argsList.add(w);
+            		    }
+            		    else
+            		    {
+            		    	return;
+            		    }
+            		    if(argsList.size()!=3)
+            		    {
+            		    	return;
+            		    }
+            		    
+            		    for(String s : argsList)
+            		    {
+            		    	System.out.println(s);
+            		    }
+            		    try
+        		    {
+        			view.initializeWall(argsList);
+        			view.displayStats();
+        		    } catch (IOException e1)
+        		    {
+        			// TODO Auto-generated catch block
+        			e1.printStackTrace();
+        		    }
     		    }
     		    else
     		    {
-    		    	return;
+    			argsList.add("f");
+    			argsList.add(filePath);
+    			for(String s : argsList)
+        		{
+        		    	System.out.println(s);
+        		}
+        		try
+    		    	{
+    				view.initializeWall(argsList);
+    				view.displayStats();
+    		    	} 
+        		catch (IOException e1)
+    		    	{
+    			
+    				e1.printStackTrace();
+    		    	}
     		    }
-    		    	String w = wField.getText();
-    		    if(NumericChecker.isNumericDouble(w))
-    		    {
-    		    	argsList.add(w);
-    		    }
-    		    else
-    		    {
-    		    	return;
-    		    }
-    		    if(argsList.size()!=3)
-    		    {
-    		    	return;
-    		    }
-    		    
-    		    for(String s : argsList)
-    		    {
-    		    	System.out.println(s);
-    		    }
-    		    try
-		    {
-			view.initializeWall(argsList);
-			view.displayStats();
-		    } catch (IOException e1)
-		    {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		    }
+
 		
     			
     		}
@@ -178,7 +208,18 @@ public class ApplicationFrame extends JFrame
 				}
 			}
 		});
-	
+	openBtn.addActionListener(new ActionListener() {
+	    
+	    @Override
+	    public void actionPerformed(ActionEvent e)
+	    {
+		filechoser = new JFileChooser();
+		filechoser.showOpenDialog(null);
+		filePath = filechoser.getSelectedFile().getAbsolutePath();
+		System.out.println("PATH: "+filePath);
+		
+	    }
+	});
     	
     }
     

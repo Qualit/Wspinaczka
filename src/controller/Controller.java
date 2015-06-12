@@ -43,14 +43,18 @@ public class Controller
     	
     	Path path = algorithm.findPath(model.getWall().getStart(), model.getWall().getGoal());
     	System.out.println("*********************************");
-    	System.out.print(model.getWallMockup(((DonePath) path).getStart()));
+    	//System.out.print(model.getWallMockup(((DonePath) path).getStart()));
 
     	if (path != null)
+    	{
+    	    
+    	
     		path.showPath();
     	
     	
-    	view.setCurrentState(((DonePath) path).getStart());
-    	view.refreshView();
+    		view.setCurrentState(((DonePath) path).getStart());
+    		view.refreshView();
+    	}
     }
 
     public Model getModel()
