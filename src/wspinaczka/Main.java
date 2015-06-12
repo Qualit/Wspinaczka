@@ -11,18 +11,19 @@ public class Main
     public static void main(String[] args) throws IOException
     {
 	
-    	List<String> argsList = new ArrayList<String>();
-    	for (String s : args)
-    	{
-    		argsList.add(s);
-    	}
+//    	List<String> argsList = new ArrayList<String>();
+//    	for (String s : args)
+//    	{
+//    		argsList.add(s);
+//    	}
+//
+//    	if (argsList.isEmpty())
+//    		throw new IOException("Wrong number of parameters\n" +
+//    				"Random grips generating:\tr [number of grips] [wall height]\n" +
+//    				"Reading data from file:\t\tf [file name]");
 
-    	if (argsList.isEmpty())
-    		throw new IOException("Wrong number of parameters\n" +
-    				"Random grips generating:\tr [number of grips] [wall height]\n" +
-    				"Reading data from file:\t\tf [file name]");
-
-    	final Controller controller = new Controller(argsList);
+    	final Controller controller = new Controller();
+    	controller.initializeView();
     	System.out.println("ZA CONTROLEEREM");
 		//controller.displayLogs();
 

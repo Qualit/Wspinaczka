@@ -1,11 +1,17 @@
 package mockups;
 
 import java.util.Map;
+import java.util.TreeMap;
 
 public class WallMockup 
 {
 	private final Map<Integer, GripMockup> gripMockupsMap;
 
+	public WallMockup()
+	{
+	    // TODO Auto-generated constructor stub
+	    this.gripMockupsMap = new TreeMap<Integer, GripMockup>();
+	}
 	public WallMockup(final Map<Integer, GripMockup> gripMockupsMap)
 	{
 		this.gripMockupsMap = gripMockupsMap;

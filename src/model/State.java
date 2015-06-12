@@ -1,5 +1,6 @@
 package model;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import algorithm.AbstractState;
@@ -24,6 +25,12 @@ public class State implements AbstractState
 	    this.previous = previous;
     }
     
+    public State()
+    {
+	// TODO Auto-generated constructor stub
+	    this.legState = new HashMap<LEG, Grip>();
+    }
+
 	public boolean areHandsOnTheSameGrip() 
 	{
 		return (legState.get(LEG.LEFT_HAND) == legState.get(LEG.RIGHT_HAND));

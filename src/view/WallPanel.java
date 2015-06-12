@@ -10,7 +10,8 @@ import java.util.TreeMap;
 
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import javax.swing.plaf.basic.BasicLookAndFeel;
+
+import com.sun.xml.internal.org.jvnet.fastinfoset.stax.LowLevelFastInfosetStreamWriter;
 
 import mockups.*;
 import configuration.Configuration;
@@ -48,9 +49,18 @@ public class WallPanel extends JPanel
     	Color gripColor;
             
     	TreeMap<Integer, GripMockup> temp = (TreeMap<Integer, GripMockup>) (wallMockup.getGripMockupsMap());
-    	
-    	Double lowestY = (temp.get(temp.firstKey())).getY();
-            
+    	//System.out.print(temp.size());
+    	Double lowestY = 0.0; 
+        
+    	if(temp.isEmpty())
+    	{
+    	    	lowestY = 0.0;
+        }
+    	else
+    	{
+    	    	lowestY = (temp.get(temp.firstKey())).getY();
+    	}
+    	    
     	for(GripMockup gripMockup : wallMockup.getGripMockupsMap().values())
     	{
     		Integer x = convertXToCoordinate(gripMockup.getX());
@@ -121,7 +131,7 @@ public class WallPanel extends JPanel
 	}
 
 	public void refresh(final WallMockup wallMockup)
-    {
+	{
 		final WallPanel wPanel = this;
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
@@ -129,9 +139,9 @@ public class WallPanel extends JPanel
 			{
 				wPanel.setGripsMap(generateNewGripsMap(wallMockup));
 				wPanel.repaint();
-    	    }
-    	});        
-    }
+			}
+		});        
+	}
 	
     	/** Gets the field image using point */
  	public GripImage getGripImage(final Point2D point)

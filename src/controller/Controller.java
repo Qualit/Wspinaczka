@@ -5,6 +5,7 @@ import java.util.List;
 
 import view.View;
 import algorithm.*;
+import mockups.WallMockup;
 import model.*;
 
 public class Controller
@@ -14,16 +15,22 @@ public class Controller
     private final Algorithm algorithm;			// pole klasy implementujacej interfejs Algorithm
     private final View view;
     
-    public Controller(List<String> argsList) throws IOException
+    public Controller() throws IOException
     {
     	this.inputHandler = new InputHandler();
-    	inputHandler.prepareParameters(argsList);
     	
-    	this.model = new Model(inputHandler.getGrips(), inputHandler.getNumberOfGrips(), inputHandler.getWallHeight());
+    	this.model = new Model();
+    	//this.model = new Model(inputHandler.getGrips(), inputHandler.getNumberOfGrips(), inputHandler.getWallHeight());
     	
     	this.algorithm = new AStar(model);
-    	this.view = new View((model.getWallMockup(model.getWall().getStart())));
+    	//this.view = new View((model.getWallMockup(model.getWall().getStart())));
+    	this.view = new View(new WallMockup());
     	
+    }
+    
+    public void initializeView()
+    {
+	view.setController(this);
     }
 
     public void displayLogs()
@@ -42,5 +49,21 @@ public class Controller
     	if (path != null)
     		path.showPath();
     }
+
+    public Model getModel()
+    {
+        return model;
+    }
+    
+    public void replaceWall(List<String> argsList) throws IOException
+    {
+	inputHandler.prepareParameters(argsList);
+	model.setWall(new Wall(inputHandler.getGrips(), inputHandler.getNumberOfGrips(), inputHandler.getWallHeight()));
+    }
+
+  
+    
+    
+    
     
 }

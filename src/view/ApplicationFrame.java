@@ -2,11 +2,13 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -17,8 +19,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import com.sun.org.apache.xerces.internal.dom.DeepNodeListImpl;
 
+
+
+
+
+
+import utils.NumericChecker;
 import configuration.ViewConfiguration;
 
 public class ApplicationFrame extends JFrame
@@ -71,17 +78,6 @@ public class ApplicationFrame extends JFrame
     	wField.setToolTipText("podaj W");
     	inputPanel.add(wField);
     	inputPanel.setVisible(true);
-	
-    	startButton.addActionListener(new ActionListener() {
-    		@Override
-    		public void actionPerformed(ActionEvent e)
-    		{
-    			// TODO Auto-generated method stub
-		
-    			
-    		}
-    	});
-	
     	JButton nextButton = new JButton("NEXT");
     	naviPanel.setLayout(new BoxLayout(naviPanel, BoxLayout.PAGE_AXIS));
     	naviPanel.add(nextButton);
@@ -93,7 +89,7 @@ public class ApplicationFrame extends JFrame
     	costField.setToolTipText("Koszt sciezki");
     	naviPanel.add(costField);
 	
-    	 deepField = new JTextArea(10,1);
+    	deepField = new JTextArea(10,1);
     	deepField.setToolTipText("Glebokosc");
     	naviPanel.add(deepField);
 
@@ -102,6 +98,55 @@ public class ApplicationFrame extends JFrame
     	this.add(naviPanel, BorderLayout.EAST);
     	this.setVisible(true);
     	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	
+    	startButton.addActionListener(new ActionListener() {
+    		@Override
+    		public void actionPerformed(ActionEvent e)
+    		{
+    			// TODO Auto-generated method stub
+    		    List<String> argsList = new ArrayList<String>();
+    		    argsList.add("r");
+    		    String n = nField.getText();
+    		    if(NumericChecker.isNumericInteger(n))
+    		    {
+    			argsList.add(n);
+    		    }
+    		    else
+    		    {
+    			return;
+    		    }
+    		    String w = wField.getText();
+    		    if(NumericChecker.isNumericDouble(w))
+    		    {
+    			argsList.add(w);
+    		    }
+    		    else
+    		    {
+    			return;
+    		    }
+    		    if(argsList.size()!=3)
+    		    {
+    			return;
+    		    }
+    		    
+    		    for(String s : argsList)
+    		    {
+    			System.out.println(s);
+    		    }
+    		    try
+		    {
+			view.initializeWall(argsList);
+		    } catch (IOException e1)
+		    {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		    }
+		
+    			
+    		}
+    	});
+	
+    	
     }
     
     public View getView()

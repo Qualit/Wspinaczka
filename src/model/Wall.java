@@ -21,6 +21,15 @@ public class Wall
      private final State start; //stan poczatkowy
      private final State goal; // stan koncowy
      
+     public Wall()
+     {
+	this.grips = new ArrayList<Grip>();
+	this.n = 0;
+	this.w = 0;
+	this.start  = new State();
+	this.goal = new State ();
+     }
+     
      // konstruktor sciany losujacy parametry
      public Wall(List<Grip> grips, final int n, final double w)
      {
