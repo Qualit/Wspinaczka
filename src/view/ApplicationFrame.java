@@ -22,12 +22,6 @@ import javax.swing.JTextField;
 import mockups.WallMockup;
 import model.State;
 
-
-
-
-
-
-
 import utils.NumericChecker;
 import configuration.ViewConfiguration;
 
@@ -58,7 +52,7 @@ public class ApplicationFrame extends JFrame
 	 this.view = view;
 	 this.wallPanel = new WallPanel(view.getStartWallMockup());
 	 wallPanel.initializePanel();
-	 wallPanel.setBackground(Color.YELLOW);
+	 wallPanel.setBackground(new Color(243,250,195));
 	 wallPanel.addMouseListener(new WallPanelListener());
 	 this.inputPanel = new JPanel();
 	
@@ -156,6 +150,7 @@ public class ApplicationFrame extends JFrame
 				final State next = view.getCurrentState().getNext();
 				if(next != null)
 				{
+					wallPanel.clear();
 					view.setCurrentState(next);
 					view.refreshView();
 				}
@@ -232,6 +227,4 @@ public class ApplicationFrame extends JFrame
 		wallPanel.refresh(wallMockup);
 		
 	}
-    
-
 }

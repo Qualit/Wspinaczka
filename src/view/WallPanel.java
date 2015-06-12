@@ -11,8 +11,6 @@ import java.util.TreeMap;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import com.sun.xml.internal.org.jvnet.fastinfoset.stax.LowLevelFastInfosetStreamWriter;
-
 import mockups.*;
 import configuration.Configuration;
 import configuration.ViewConfiguration;
@@ -37,8 +35,7 @@ public class WallPanel extends JPanel
     public void initializePanel()
     {
     	this.setSize(panelWidth, panelHeight);
-    	this.setBackground(Color.YELLOW);
-    	    
+    	this.setOpaque(true);
     	this.setVisible(true);
     	refresh(startWallMockup);    
     }
@@ -132,11 +129,15 @@ public class WallPanel extends JPanel
 
 	public void refresh(final WallMockup wallMockup)
 	{
+		
 		final WallPanel wPanel = this;
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run()
 			{
+				wPanel.setFocusable(true);
+				wPanel.removeAll();
+				wPanel.repaint();
 				wPanel.setGripsMap(generateNewGripsMap(wallMockup));
 				wPanel.repaint();
 			}
@@ -175,8 +176,12 @@ public class WallPanel extends JPanel
     	    
 	@Override
 	public void paintComponent(Graphics g)
-	{
+	{	
 		Graphics2D g2 = (Graphics2D) g;
+		
+		g2.setColor(getBackground());
+		g2.fillRect(0, 0, getWidth(), getHeight());
+		
 		for(GripImage gripImage: gripsMap.values())
     	{
 			g2.setColor(gripImage.getGripColor());
@@ -192,6 +197,12 @@ public class WallPanel extends JPanel
 	public void setGripsMap(Map<Coordinate, GripImage> gripsMap)
 	{
 		this.gripsMap = gripsMap;
+	}
+
+	public void clear() 
+	{
+		this.removeAll();
+		this.repaint();
 	} 
 	
 //	@Override
