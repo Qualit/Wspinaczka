@@ -23,11 +23,11 @@ public class Wall
      
      public Wall()
      {
-	this.grips = new ArrayList<Grip>();
-	this.n = 0;
-	this.w = 0;
-	this.start  = new State();
-	this.goal = new State ();
+    	 this.grips = new ArrayList<Grip>();
+    	 this.n = 0;
+    	 this.w = 0;
+    	 this.start  = new State();
+    	 this.goal = new State ();
      }
      
      // konstruktor sciany losujacy parametry
@@ -45,42 +45,41 @@ public class Wall
     	 startowaMapa.put(LEG.LEFT_FOOT, grips.get(0));
     	 startowaMapa.put(LEG.RIGHT_FOOT, grips.get(0));
  	 
-    	 koncowaMapa.put(LEG.LEFT_HAND, grips.get(this.n+1));
-    	 koncowaMapa.put(LEG.RIGHT_HAND, grips.get(this.n+1));
-    	 koncowaMapa.put(LEG.LEFT_FOOT, grips.get(this.n));
-    	 koncowaMapa.put(LEG.RIGHT_FOOT, grips.get(this.n));
+    	 koncowaMapa.put(LEG.LEFT_HAND, grips.get(this.n+3));
+    	 koncowaMapa.put(LEG.RIGHT_HAND, grips.get(this.n+3));
+    	 koncowaMapa.put(LEG.LEFT_FOOT, grips.get(this.n+2));
+    	 koncowaMapa.put(LEG.RIGHT_FOOT, grips.get(this.n+2));
 
     	 
     	 this.start = new State(startowaMapa, null);
     	 this.goal = new State(koncowaMapa, null);
      }     
 
-	public  List<Grip> getFeasibleGrips(final State current, LEG activeLeg)
-     {
-    	 // dla zadanej konczyny zwraca kontener dopuszczalnych 
-    	 // uchwytow do przejscia
-	 
-    	 List<Grip> feasibleGrips = new ArrayList<Grip>();
-    	 for (int i = firstProbableGrip(current, activeLeg) ; isStillProbable(current, activeLeg, i) ; i++)
-//    	 for (int i = firstFeasibleGrip(current, activeLeg) ; lastFeasibleGrip(current, activeLeg, radius) ; i++)
-//    	 for (int i = current.getLegGrip(activeLeg).getIdGrip()+1; i<=n+1 ; i++)
-    	 {
-    		 if(grips.get(i).isFeasible(current, activeLeg))
-    		 {
-    			 feasibleGrips.add(grips.get(i));
-    		 }
-    	 }
-	 
-    	 // tutaj logika znajdowania dozwolonych wierzcholkow
-    	 Collections.sort(feasibleGrips, new Comparator<Grip>() {
-    		 @Override
-    		 public int compare(Grip grip1, Grip grip2)
-    		 {
-    			 return new Double(grip1.getCost()).compareTo(new Double(grip2.getCost()));
-    		 }
-    	 });
-    	 return feasibleGrips;
-     }
+	public List<Grip> getFeasibleGrips(final State current, LEG activeLeg) 
+	{
+		// dla zadanej konczyny zwraca kontener dopuszczalnych
+		// uchwytow do przejscia
+
+		List<Grip> feasibleGrips = new ArrayList<Grip>();
+		for (int i = firstProbableGrip(current, activeLeg); isStillProbable(current, activeLeg, i); i++) 
+		{
+			if (grips.get(i).isFeasible(current, activeLeg)) 
+			{
+				feasibleGrips.add(grips.get(i));
+			}
+		}
+
+		// tutaj logika znajdowania dozwolonych wierzcholkow
+		Collections.sort(feasibleGrips, new Comparator<Grip>() 
+		{
+			@Override
+			public int compare(Grip grip1, Grip grip2) 
+			{
+				return new Double(grip1.getCost()).compareTo(new Double(grip2.getCost()));
+			}
+		});
+		return feasibleGrips;
+	}
 	
 	private boolean isStillProbable(State current, LEG activeLeg, int i) 
 	{
@@ -88,7 +87,7 @@ public class Wall
 		{
 			case LEFT_HAND:
 			{
-				if(i > n+1)
+				if(i > n+3)
 				{
 					return false;
 				}
@@ -103,7 +102,7 @@ public class Wall
 			}
 			case RIGHT_HAND:
 			{
-				if(i > n+1)
+				if(i > n+3)
 				{
 					return false;
 				}
@@ -179,39 +178,14 @@ public class Wall
 		return current.getLegGrip(activeLeg).getIdGrip()+1;
 	}
 
-	public final int getN() 
-	{
-		return n;
-	}
-
-	public final double getW() 
-	{
-		return w;
-	}
-
-	public final List<Grip> getGrips() 
-	{
-		return grips;
-	}
-
-	public final State getStart() 
-	{
-		return start;
-	}
-
-	public final State getGoal() 
-	{
-		return goal;
-	}
-
 	public WallMockup getWallMockup(State currentState) 
 	{
 		double lowerBound;
 		double upperBound;
 		
-		if(currentState.getLegState().get(LEG.LEFT_FOOT).getY() <= currentState.getLegState().get(LEG.RIGHT_FOOT).getY())
+		if(currentState.getLegGrip(LEG.LEFT_FOOT).getY() <= currentState.getLegGrip(LEG.RIGHT_FOOT).getY())
 		{
-			lowerBound = currentState.getLegState().get(LEG.LEFT_FOOT).getY() - 1;
+			lowerBound = currentState.getLegGrip(LEG.LEFT_FOOT).getY() - 1;
 			if(lowerBound < 0)
 			{
 				lowerBound = 0;
@@ -225,7 +199,7 @@ public class Wall
 		}
 		else
 		{
-			lowerBound = currentState.getLegState().get(LEG.RIGHT_FOOT).getY() - 1;
+			lowerBound = currentState.getLegGrip(LEG.RIGHT_FOOT).getY() - 1;
 			if(lowerBound < 0)
 			{
 				lowerBound = 0;
@@ -246,10 +220,10 @@ public class Wall
 			gripMockupsList.put(g.getIdGrip(), new GripMockup(g));
 		}
 		
-		Integer leftHandId = currentState.getLegState().get(LEG.LEFT_HAND).getIdGrip();
-		Integer rightHandId = currentState.getLegState().get(LEG.RIGHT_HAND).getIdGrip();
-		Integer leftFootId = currentState.getLegState().get(LEG.LEFT_FOOT).getIdGrip();
-		Integer rightFootId = currentState.getLegState().get(LEG.RIGHT_FOOT).getIdGrip();
+		Integer leftHandId = currentState.getLegGrip(LEG.LEFT_HAND).getIdGrip();
+		Integer rightHandId = currentState.getLegGrip(LEG.RIGHT_HAND).getIdGrip();
+		Integer leftFootId = currentState.getLegGrip(LEG.LEFT_FOOT).getIdGrip();
+		Integer rightFootId = currentState.getLegGrip(LEG.RIGHT_FOOT).getIdGrip();
 		
 		(gripMockupsList.get(leftHandId)).setLeg(LEG.LEFT_HAND);
 		(gripMockupsList.get(rightHandId)).setLeg(LEG.RIGHT_HAND);
@@ -277,5 +251,30 @@ public class Wall
 			gripsList.add(g);
 		}
 		return gripsList;
+	}
+	
+	public final int getN() 
+	{
+		return n;
+	}
+
+	public final double getW() 
+	{
+		return w;
+	}
+
+	public final List<Grip> getGrips() 
+	{
+		return grips;
+	}
+
+	public final State getStart() 
+	{
+		return start;
+	}
+
+	public final State getGoal() 
+	{
+		return goal;
 	}
 }

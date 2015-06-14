@@ -13,21 +13,10 @@ public class Model
 	    this.wall = new Wall();
 	}
 	
-	public Model(List<Grip> grips, int numberOfGrips, double wallHeight) 
-	{
-		this.wall = new Wall(grips, numberOfGrips, wallHeight);
-		
-	}
-	
-	public List<Grip> getFeasibleGrips(final State current, LEG activeLeg, double radius)
+	public List<Grip> getFeasibleGrips(final State current, LEG activeLeg)
     {
 		return wall.getFeasibleGrips(current, activeLeg);
     }
-
-	public final Wall getWall() 
-	{
-		return wall;
-	}
 	
 	public final WallMockup getWallMockup(State currentState)
 	{
@@ -37,6 +26,11 @@ public class Model
 	public List<Grip> getGripsBetween(final double lowerBoud, final double upperBound)
 	{
 		return wall.getGripsBetween(lowerBoud, upperBound);
+	}
+	
+	public final Wall getWall() 
+	{
+		return wall;
 	}
 
 	public void setWall(Wall wall)

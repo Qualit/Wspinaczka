@@ -23,7 +23,7 @@ public class InputHandler
 		this.numberOfGrips = 0;
 		this.wallHeight = 0;
 	}
-	
+
 	public void prepareParameters(List<String> argsList) throws IOException 
 	{
 		switch (argsList.get(0))
@@ -34,27 +34,6 @@ public class InputHandler
 			case "f":
 				gripsFromFile(argsList.get(1));
 				break;
-			default:
-				break;
-				
-		}
-	}
-	
-	public void prepareParametersFromGUI(List<String> argsList, INPUT_OPTION option) throws IOException
-	{
-		switch (option) {
-			case FILE:
-			{
-				gripsFromFile(argsList.get(0));
-				
-				break;
-			}
-			case RANDOM:
-			{
-				randomGrips(Integer.parseInt(argsList.get(0)), Double.parseDouble(argsList.get(1)));
-
-				break;
-			}
 			default:
 				break;
 		}
@@ -72,15 +51,17 @@ public class InputHandler
 		wallHeight = Double.parseDouble(tokens[1]);
 		
 		grips.add(new Grip(0, 1.5 , 0.0, 2));
+		grips.add(new Grip(1, 1.5 , 0.01, 2));
 		
 		for (int i=0 ; i < numberOfGrips ; i++)
 		{
 			textLine = bufferedReader.readLine();
 			tokens = textLine.split(delims);
-			grips.add(new Grip(i+1, Double.parseDouble(tokens[0]), Double.parseDouble(tokens[1]), Double.parseDouble(tokens[2])));
+			grips.add(new Grip(i+2, Double.parseDouble(tokens[0]), Double.parseDouble(tokens[1]), Double.parseDouble(tokens[2])));
 		}
 		
-		grips.add(new Grip(numberOfGrips+1, 1.5 , wallHeight, 1));
+		grips.add(new Grip(numberOfGrips+2, 1.5 , wallHeight-0.01, 1));
+		grips.add(new Grip(numberOfGrips+3, 1.5 , wallHeight, 1));
 
 		bufferedReader.close();
 		
@@ -88,8 +69,6 @@ public class InputHandler
 
 	private void randomGrips(int n, double w) 
 	{
-		// TODO Auto-generated method stub
-	    
 	    numberOfGrips = n;
 	    wallHeight = w;
 	    
@@ -104,7 +83,8 @@ public class InputHandler
 	    }
 	    
 	    grips.add(new Grip(0, 1.5 , 0.0, 2));
-	    int j=1;
+	    grips.add(new Grip(1, 1.5 , 0.01, 2));
+	    int j=2;
 	    for(Grip g : tmp.values())
 	    {
 	    	g.setIdGrip(j);
@@ -112,7 +92,8 @@ public class InputHandler
 	    	j++;
 	    }
 	    
-	    grips.add(new Grip(numberOfGrips+1, 1.5 , wallHeight, 1));
+	    grips.add(new Grip(numberOfGrips+2, 1.5 , wallHeight-0.01, 1));
+		grips.add(new Grip(numberOfGrips+3, 1.5 , wallHeight, 1));
 		
 	}
 
@@ -140,9 +121,4 @@ public class InputHandler
 	{
 		this.wallHeight = wallHeight;
 	}
-
-
-
-	
-
 }

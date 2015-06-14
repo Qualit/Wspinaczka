@@ -19,58 +19,57 @@ public class DonePath extends Path
 	}
 
 	@Override
-	public void showPath()
+	public void showPath() 
 	{
 		State now = start;
 
-		while (now != null)
+		while (now != null) 
 		{
 			System.out.println(now.toString());
 			now = now.getNext();
 		}
-			
 	}
-	
-	private void assignNextPointers()
+
+	private void assignNextPointers() 
 	{
 		State current = null;
 		State nextState = goal;
 
-		do
+		do 
 		{
 			current = nextState.getPrevious();
 			current.setNext(nextState);
 			nextState = current;
-		}while(current.getPrevious() != null);
+		} while (current.getPrevious() != null);
 	}
-	
 
 	private void assignNumberOfStateVariable() 
 	{
 		State current = start;
 		int number = 0;
-		
-		do
+
+		do 
 		{
+
 			current.setNumberOfState(number);
 			number++;
 			current = current.getNext();
-		}while(current != null);
+		} while (current != null);
 	}
 
-	public final State getStart() {
+	public final State getStart() 
+	{
 		return start;
 	}
 
 	public void setCosts(Map<State, Double> costs) 
 	{
 		State current = start;
-		
-		do
+
+		do 
 		{
 			current.setOwnCost(costs.get(current));
 			current = current.getNext();
-		}while(current != null);
-		
+		} while (current != null);
 	}
 }

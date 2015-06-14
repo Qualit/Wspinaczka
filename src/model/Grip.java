@@ -100,17 +100,8 @@ public class Grip
 			return false;
 		return true;
 	}
-
-	public String toString()
-	{
-    	StringBuilder sb = new StringBuilder();
-
-    	sb.append("id=" + idGrip  +" x=" +x + " y=" + y + " cost=" + cost + " \n");
-
-    	return sb.toString();
-	}
 	
-	public String toString2()
+	public String toString()
 	{
     	StringBuilder sb = new StringBuilder();
 

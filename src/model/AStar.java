@@ -2,7 +2,6 @@ package model;
 
 import java.util.*;
 import algorithm.*;
-import configuration.*;
 
 public class AStar implements Algorithm 
 {
@@ -11,7 +10,7 @@ public class AStar implements Algorithm
     	private final Set<State> closedSet; // zbior stanow zamknietych
     	private final Map<State, Double> gScore; // waga aktualnie najtanszej sciezki
     	private final Map<State, Double> fScore; // gScore + heuristic
-    	private State current;
+    	
 
 	public AStar(Model model) 
 	{
@@ -20,11 +19,13 @@ public class AStar implements Algorithm
 	    this.closedSet = new HashSet<State>();
 	    this.gScore = new HashMap<State, Double>();
 	    this.fScore = new HashMap<State, Double>();
-	    this.current = null;	// UWAGA
+	    
 	}
 
 	@Override
-	public Path findPath(AbstractState start, AbstractState goal) {
+	public Path findPath(AbstractState start, AbstractState goal) 
+	{
+		State current= null;
 	    openSet.add((State)start);
 	    gScore.put((State)start, 0.0);
 	    fScore.put((State)start, gScore.get((State)start) + calculateHeuristicCost((State) start, (State) goal ));
@@ -49,17 +50,17 @@ public class AStar implements Algorithm
 	    	fScore.remove(current);
 	    	closedSet.add(current);
 	    	
-	    	Map<State, Double> neighbourNodesAndCosts = new HashMap<State, Double>();
-	    	neighbourNodesAndCosts = neighbourNodes(current);
+	    	Map<State, Double> neighbourStatesAndCosts = new HashMap<State, Double>();
+	    	neighbourStatesAndCosts = createNeighbourStates(current);
 	
-	    	for (State neighbour : neighbourNodesAndCosts.keySet())
+	    	for (State neighbour : neighbourStatesAndCosts.keySet())
 	    	{
 	    		if(closedSet.contains(neighbour))
 	    		{
 	    			continue;
 	    		}
 	    		
-	    		Double tentativeGScore = gScore.get(current) + neighbourNodesAndCosts.get(neighbour);
+	    		Double tentativeGScore = gScore.get(current) + neighbourStatesAndCosts.get(neighbour);
 	    		
 	    		if(!openSet.contains(neighbour))
 	    		{
@@ -83,44 +84,44 @@ public class AStar implements Algorithm
 		return null;
 	}
 
-	private Map<State, Double> neighbourNodes(State current) 
+	private Map<State, Double> createNeighbourStates(State current) 
 	{
 		final Map<State, Double> neighbourNodesAndCosts = new HashMap<State, Double>();
 		if(current.areHandsOnTheSameGrip())
 		{
-			
-			List<Grip> feasibleGrips = model.getFeasibleGrips(current, LEG.LEFT_HAND, Configuration.radius);
-			creatingNeighbouringStates(neighbourNodesAndCosts, feasibleGrips, current, LEG.LEFT_HAND);
-			
+
+			List<Grip> feasibleGrips = model.getFeasibleGrips(current, LEG.LEFT_HAND);
+			createNeighbouringStatesForOneLeg(neighbourNodesAndCosts, feasibleGrips, current, LEG.LEFT_HAND);
+
 		}
 		else
 		{
-			
-			List<Grip> feasibleGrips = model.getFeasibleGrips(current, LEG.LEFT_HAND, Configuration.radius);
-			creatingNeighbouringStates(neighbourNodesAndCosts, feasibleGrips, current, LEG.LEFT_HAND);
-			
-			List<Grip> feasibleGrips2 = model.getFeasibleGrips(current, LEG.RIGHT_HAND, Configuration.radius);
-			creatingNeighbouringStates(neighbourNodesAndCosts, feasibleGrips2, current, LEG.RIGHT_HAND);
+
+			List<Grip> feasibleGrips = model.getFeasibleGrips(current, LEG.LEFT_HAND);
+			createNeighbouringStatesForOneLeg(neighbourNodesAndCosts, feasibleGrips, current, LEG.LEFT_HAND);
+
+			List<Grip> feasibleGrips2 = model.getFeasibleGrips(current, LEG.RIGHT_HAND);
+			createNeighbouringStatesForOneLeg(neighbourNodesAndCosts, feasibleGrips2, current, LEG.RIGHT_HAND);
 		}
 		if(current.areFeetOnTheSameGrip())
 		{
-			List<Grip> feasibleGrips = model.getFeasibleGrips(current, LEG.LEFT_FOOT, Configuration.radius);
-			creatingNeighbouringStates(neighbourNodesAndCosts, feasibleGrips, current, LEG.LEFT_FOOT);
-			
+			List<Grip> feasibleGrips = model.getFeasibleGrips(current, LEG.LEFT_FOOT);
+			createNeighbouringStatesForOneLeg(neighbourNodesAndCosts, feasibleGrips, current, LEG.LEFT_FOOT);
+
 		}
 		else
 		{
-			List<Grip> feasibleGrips = model.getFeasibleGrips(current, LEG.LEFT_FOOT, Configuration.radius);
-			creatingNeighbouringStates(neighbourNodesAndCosts, feasibleGrips, current, LEG.LEFT_FOOT);
-			
-			List<Grip> feasibleGrips2 = model.getFeasibleGrips(current, LEG.RIGHT_FOOT, Configuration.radius);
-			creatingNeighbouringStates(neighbourNodesAndCosts, feasibleGrips2, current, LEG.RIGHT_FOOT);
-			
+			List<Grip> feasibleGrips = model.getFeasibleGrips(current, LEG.LEFT_FOOT);
+			createNeighbouringStatesForOneLeg(neighbourNodesAndCosts, feasibleGrips, current, LEG.LEFT_FOOT);
+
+			List<Grip> feasibleGrips2 = model.getFeasibleGrips(current, LEG.RIGHT_FOOT);
+			createNeighbouringStatesForOneLeg(neighbourNodesAndCosts, feasibleGrips2, current, LEG.RIGHT_FOOT);
+
 		}
 		return neighbourNodesAndCosts;
 	}
 
-	private void creatingNeighbouringStates(Map<State, Double> neighbourNodes, List<Grip> feasibleGrips, State currentState, LEG activeLeg) 
+	private void createNeighbouringStatesForOneLeg(Map<State, Double> neighbourStates, List<Grip> feasibleGrips, State currentState, LEG activeLeg) 
 	{
 		for (Grip g : feasibleGrips)
 		{
@@ -130,26 +131,17 @@ public class AStar implements Algorithm
 			newLegState.put(LEG.LEFT_FOOT, currentState.getLegGrip(LEG.LEFT_FOOT));
 			newLegState.put(LEG.RIGHT_FOOT, currentState.getLegGrip(LEG.RIGHT_FOOT));
 			newLegState.put(activeLeg, g);
-			neighbourNodes.put(new State(newLegState, null), g.getCost());
+			neighbourStates.put(new State(newLegState, null), g.getCost());
 		}
 		
 	}
 
 	private Double calculateHeuristicCost(State start, State goal) 
 	{
-		//return (model.getWall().getW()- start.getLegState().get(LEG.LEFT_FOOT).getY())*2;
 		Double lh = (goal.getLegGrip(LEG.LEFT_HAND).distance(start.getLegGrip(LEG.LEFT_HAND))) /2;
 		Double rh = (goal.getLegGrip(LEG.RIGHT_HAND).distance(start.getLegGrip(LEG.RIGHT_HAND))) /2;
 		Double lf = (goal.getLegGrip(LEG.LEFT_FOOT).distance(start.getLegGrip(LEG.LEFT_FOOT))) /2;
 		Double rf = (goal.getLegGrip(LEG.RIGHT_FOOT).distance(start.getLegGrip(LEG.RIGHT_FOOT))) /2;
-		if(lh < 1)
-			lh = 1.0;
-		if(rh < 1)
-			rh = 1.0;
-		if(lf < 1)
-			lf = 1.0;
-		if(rf < 1)
-			rf = 1.0;
 		
 		return lh+rh+lf+rf;
 	}
@@ -158,14 +150,8 @@ public class AStar implements Algorithm
 	@Override
 	public void printGrips()
 	{
-		for (Grip g : model.getWall().getGrips())
-			System.out.print(g.toString());
-	}
-	
-	public void printGrips2()
-	{
 		System.out.println(model.getWall().getN() + " " + model.getWall().getW());
 		for (Grip g : model.getWall().getGrips())
-			System.out.print(g.toString2());
+			System.out.print(g.toString());
 	}
 }

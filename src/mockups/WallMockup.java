@@ -38,19 +38,24 @@ public class WallMockup
 	{
 	    return gripMockupsMap;
 	}
-	public final double getCurrentCost() {
+	public final double getCurrentCost() 
+	{
 		return currentCost;
 	}
-	public final int getNumberOfState() {
+	public final int getNumberOfState() 
+	{
 		return numberOfState;
 	}
-	public final void setGripMockupsMap(Map<Integer, GripMockup> gripMockupsMap) {
+	public final void setGripMockupsMap(Map<Integer, GripMockup> gripMockupsMap) 
+	{
 		this.gripMockupsMap = gripMockupsMap;
 	}
-	public final void setCurrentCost(double currentCost) {
+	public final void setCurrentCost(double currentCost) 
+	{
 		this.currentCost = currentCost;
 	}
-	public final void setNumberOfState(int numberOfState) {
+	public final void setNumberOfState(int numberOfState) 
+	{
 		this.numberOfState = numberOfState;
 	}
 	

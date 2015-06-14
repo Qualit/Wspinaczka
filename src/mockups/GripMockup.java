@@ -13,7 +13,6 @@ public class GripMockup
 	private final double cost;
 	private LEG leg;
 
-
 	public GripMockup(final Grip grip)
 	{
 		this.idGrip = grip.getIdGrip();
@@ -61,8 +60,4 @@ public class GripMockup
 	{
 	    return leg;
 	}
-	
-	
-	
-	
 }

@@ -5,10 +5,6 @@ import java.util.Map;
 
 import algorithm.AbstractState;
 
-/**
- * @author mariusz
- *
- */
 public class State implements AbstractState
 {
     // mapa wskazujaca ktora konczyna jest na ktorym uchwycie, kolejnosc LEFT_HAND, RIGHT_HAND, LEFT_FOOT, RIGHT_FOOT
@@ -17,12 +13,13 @@ public class State implements AbstractState
     private State previous;
     //stan nastepny do ktorego pojdzie wspinacz
     private State next;
-    
+    //koszt dojscia do tego stanu
     private double ownCost;
+    //numer stanu w gotowej sciezce
     private int numberOfState;
 
     public State(Map<LEG, Grip> legState, State previous)
-    {	// TODO Auto-generated method stub
+    {
 	    super();
 	    this.legState = legState;
 	    this.previous = previous;
@@ -33,7 +30,6 @@ public class State implements AbstractState
     
     public State()
     {
-	// TODO Auto-generated constructor stub
 	    this.legState = new HashMap<LEG, Grip>();
     }
 
@@ -46,12 +42,7 @@ public class State implements AbstractState
 	{
 		return (legState.get(LEG.LEFT_FOOT) == legState.get(LEG.RIGHT_FOOT));
 	}
-
     
-    /* (non-Javadoc)
-     * returns hash code of state, calculated as a weighted sum of legs in this state
-     * @see java.lang.Object#hashCode()
-     */
     @Override
     public int hashCode()
     {
@@ -129,11 +120,6 @@ public class State implements AbstractState
         this.previous = previous;
     }
 
-	public final Map<LEG, Grip> getLegState() 
-	{
-		return legState;
-	}
-
 	public Grip getLegGrip(LEG activeLeg) 
 	{
 		return legState.get(activeLeg);
@@ -149,19 +135,23 @@ public class State implements AbstractState
 		this.next = next;
 	}
 
-	public final double getOwnCost() {
+	public final double getOwnCost() 
+	{
 		return ownCost;
 	}
 
-	public final int getNumberOfState() {
+	public final int getNumberOfState() 
+	{
 		return numberOfState;
 	}
 
-	public final void setOwnCost(double ownCost) {
+	public final void setOwnCost(double ownCost) 
+	{
 		this.ownCost = ownCost;
 	}
 
-	public final void setNumberOfState(int numberOfState) {
+	public final void setNumberOfState(int numberOfState) 
+	{
 		this.numberOfState = numberOfState;
 	}
 }
